@@ -7,17 +7,17 @@
  */
 public class HumanPlayer extends Player
 {
-    GameDisplay gameDisplay;
+    GameController gameController;
 
-    public HumanPlayer(Board board, char mark, GameDisplay gameDisplay)
+    public HumanPlayer(Board board, char mark, GameController gameController)
     {
         super(board, mark);
-        this.gameDisplay = gameDisplay;
+        this.gameController = gameController;
     }
 
     public void makeMove() throws Exception
     {
-        int position = gameDisplay.requestUserMove(mark);
+        int position = gameController.requestUserMove(mark);
         board.populate(mark, position);
     }
 }

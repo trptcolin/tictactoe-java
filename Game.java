@@ -10,9 +10,9 @@ public class Game
     private Board board;
     private Player player1;
     private Player player2;
-    private GameDisplay gameDisplay;
+    private GameController gameController;
 
-    public Game(Board board, GameDisplay gameDisplay, Player player1, Player player2)
+    public Game(Board board, GameController gameController, Player player1, Player player2)
     {
         this.board = board;
 
@@ -20,10 +20,10 @@ public class Game
         this.player2 = player2;
         player1.setOtherPlayer(player2);
 
-        this.gameDisplay = gameDisplay;
+        this.gameController = gameController;
     }
 
-    public void play()
+    public boolean play()
     {
         Player[] players = { player1, player2 };
         int turn = 0;
@@ -31,14 +31,13 @@ public class Game
         while(!board.gameOver())
         {
             if(board.empty())
-                gameDisplay.printInitialBoard();
+                gameController.printInitialBoard();
             else
-                gameDisplay.print();
+                gameController.updateDisplay();
 
             try
             {
                 players[turn % 2].makeMove();
-                board.gameOver();
             }
             catch(Exception e)
             {
@@ -48,6 +47,8 @@ public class Game
             turn++;
         }
 
-        gameDisplay.printFinalBoard();
+        gameController.printFinalBoard();
+
+        return gameController.shouldPlayAgain();
     }
 }

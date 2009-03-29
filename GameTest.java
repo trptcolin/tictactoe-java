@@ -17,7 +17,7 @@ import java.io.ByteArrayOutputStream;
 public class GameTest extends Assert
 {
     private MockBoard board;
-    private MockGameDisplay gameDisplay;
+    private MockGameController gameDisplay;
     private MockPlayer player1;
     private MockPlayer player2;
     private Game game;
@@ -26,7 +26,7 @@ public class GameTest extends Assert
     public void setup()
     {
         board = new MockBoard();
-        gameDisplay = new MockGameDisplay(board);
+        gameDisplay = new MockGameController(board);
         player1 = new MockPlayer(board, 'X');
         player2 = new MockPlayer(board, 'O');
         game = new Game(board, gameDisplay, player1, player2);

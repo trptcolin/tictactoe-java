@@ -38,16 +38,6 @@ public class PlayerTest extends Assert
         assertEquals('O', Player.otherPlayerMark('X'));
     }
 
-//    @Test
-//    public void shouldHaveOnePossibleMove() throws Exception
-//    {
-//        for(int i = 0; i < 8; i++)
-//            player.makeMove();
-//
-//        assertEquals(0, player.board.charAt(8));
-//        assertEquals(1, player.board.openSpaces().size());
-//    }
-
     @Test
     public void shouldHaveOnePossibleResultingBoard() throws Exception
     {
