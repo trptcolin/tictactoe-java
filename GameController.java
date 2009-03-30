@@ -17,7 +17,7 @@ public abstract class GameController
         this.board = board;
     }
 
-    private char charAt(int position)
+    protected char charAt(int position)
     {
         char mark = board.charAt(position);
         if(mark == 0)
@@ -36,4 +36,6 @@ public abstract class GameController
 //    protected abstract int requestUserInput();
 
     public abstract boolean shouldPlayAgain();
+
+    public abstract void setGUI(GUI gui);
 }

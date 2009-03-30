@@ -1,10 +1,5 @@
 import junit.framework.Assert;
-import org.junit.Test;
 import org.junit.Before;
-
-import javax.swing.*;
-import java.awt.event.MouseListener;
-import java.awt.*;
 
 /**
  * Created by IntelliJ IDEA.
@@ -16,25 +11,13 @@ import java.awt.*;
 public class GUITest extends Assert
 {
     private GUIController guiController;
-    private GUI gui;
+    private SwingGUI swingGui;
 
     @Before
     public void setup()
     {
         guiController = new GUIController(new Board());
-        gui = new GUI(guiController);
+        swingGui = new SwingGUI(guiController);
     }
-
-    @Test
-    public void shouldSetWaitingForInput() throws Exception
-    {
-        assertEquals(false, gui.isWaitingForInput());
-        gui.setWaitingForInput(true);
-        assertEquals(true, gui.isWaitingForInput());
-        gui.setWaitingForInput(false);
-        assertEquals(false, gui.isWaitingForInput());
-    }
-
-
     
 }

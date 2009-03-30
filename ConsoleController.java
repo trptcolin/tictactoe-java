@@ -15,7 +15,7 @@ public class ConsoleController extends GameController
         super(board);
     }
     
-    private char charAt(int position)
+    protected char charAt(int position)
     {
         char mark = board.charAt(position);
         if(mark == 0)
@@ -118,5 +118,9 @@ public class ConsoleController extends GameController
     public boolean shouldPlayAgain()
     {
         return false;
+    }
+
+    public void setGUI(GUI gui)
+    {
     }
 }

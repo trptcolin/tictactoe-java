@@ -24,38 +24,6 @@ public class ConsoleControllerTest extends Assert
     }
 
     @Test
-    public void shouldPrintEmptyBoard()
-    {
-        assertEquals(
-                "   |   |   \n" +
-                "-----------\n" +
-                "   |   |   \n" +
-                "-----------\n" +
-                "   |   |   \n",
-                gameDisplay.boardToString());
-    }
-
-    @Test
-    public void shouldPrintFullBoard() throws Exception
-    {
-        board.populate('X', 0, 0);
-        board.populate('O', 1, 1);
-        board.populate('X', 2, 2);
-        board.populate('O', 0, 2);
-        board.populate('X', 2, 0);
-        board.populate('O', 1, 0);
-        board.populate('X', 2, 1);
-
-        assertEquals(
-            " X |   | O \n" +
-            "-----------\n" +
-            " O | O |   \n" +
-            "-----------\n" +
-            " X | X | X \n",
-            gameDisplay.boardToString());
-    }
-
-    @Test
     public void shouldRequestUserMove()
     {
         InputStream realStdin = System.in;

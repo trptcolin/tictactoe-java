@@ -2,11 +2,6 @@ import junit.framework.Assert;
 import org.junit.Test;
 import org.junit.Before;
 
-import javax.swing.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.ActionEvent;
-import java.awt.*;
-
 /**
  * Created by IntelliJ IDEA.
  * User: 8thlight
@@ -18,7 +13,7 @@ public class GUIControllerTest extends Assert
 {
     private Board board;
     private GUIController guiController;
-    private GUI gui;
+//    private SwingGUI swingGui;
     private MockGUI mockGui;
 
     @Before
@@ -26,17 +21,17 @@ public class GUIControllerTest extends Assert
     {
         board = new MockBoard();
         guiController = new GUIController(board);
-        gui = new GUI(guiController);
         mockGui = new MockGUI(guiController);
-        
+
         guiController.gui = mockGui;
     }
 
     @Test
     public void shouldSetGUI() throws Exception
     {
-        guiController.gui = gui;
-        assertEquals(gui, guiController.gui);
+        MockGUI newMockGui = new MockGUI(guiController);
+        guiController.gui = newMockGui;
+        assertEquals(newMockGui, guiController.gui);
 
         guiController.gui = mockGui;
         assertEquals(mockGui, guiController.gui);
@@ -56,7 +51,7 @@ public class GUIControllerTest extends Assert
 
         assertEquals(true, mockGui.clearCalled);
         assertEquals(true, mockGui.buildBoardCalled);
-        // uses updateDisplay(), so same test        
+        // uses updateDisplay(), so same test
         assertEquals(true, mockGui.redrawCalled);
     }
 
@@ -86,7 +81,7 @@ public class GUIControllerTest extends Assert
 
         Thread.sleep(101);
         guiController.squareChosen(0);
-        
+
         thread.join();
 
         assertEquals(0, squareChosen[0]);
@@ -128,7 +123,7 @@ public class GUIControllerTest extends Assert
     public void shouldChooseGameType() throws Exception
     {
         final int[] gameType = new int[]{-1};
-        
+
         Thread thread = new Thread() {
             public void run()
             {

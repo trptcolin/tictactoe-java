@@ -4,7 +4,7 @@
  * Date: Mar 29, 2009
  * Time: 12:01:56 PM
  */
-public class MockGUI extends GUI
+public class MockGUI implements GUI
 {
     public boolean redrawCalled = false;
     public boolean clearCalled = false;
@@ -15,28 +15,26 @@ public class MockGUI extends GUI
     public boolean setWaitingForInputCalled = false;
     public boolean setWaitingForInputCalledWith = false;
 
+    private GUIController guiController;
+
     public MockGUI(final GUIController guiController)
     {
-        super(guiController);
         this.guiController = guiController;
     }
 
     public void redraw()
     {
         redrawCalled = true;
-        super.redraw();
     }
 
     public void clear()
     {
         clearCalled = true;
-        super.redraw();
     }
 
     public void buildBoard()
     {
         buildBoardCalled = true;
-        super.buildBoard();
     }
 
     public void buildGameTypeChoices()
@@ -47,19 +45,11 @@ public class MockGUI extends GUI
     public void stopListening()
     {
         stopListeningCalled = true;
-        super.stopListening();
     }
 
     public void addFinalMessage()
     {
         addFinalMessageCalled = true;
-        super.addFinalMessage();
     }
 
-    public void setWaitingForInput(boolean waiting)
-    {
-        super.setWaitingForInput(waiting);
-        setWaitingForInputCalled = true;
-        setWaitingForInputCalledWith = waiting;
-    }
 }

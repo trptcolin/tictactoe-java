@@ -1,9 +1,3 @@
-import javax.swing.*;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-
 /**
  * Created by IntelliJ IDEA.
  * User: 8thlight
@@ -14,18 +8,26 @@ import java.awt.event.ActionEvent;
 public class GUIController extends GameController
 {
     protected GUI gui;
+    
     public int lastMove = -1;
     protected int gameType = -1;
-//    private char activeMark = 0;
     public boolean playAgain = false;
-    public boolean waitingForInput = false;  
-    
+    public boolean waitingForInput = false;
+
     public GUIController(Board board)
     {
         super(board);
-        gui = new GUI(this);
     }
 
+    protected char charAt(int spot)
+    {
+        return board.charAt(spot);
+    }
+
+    public void setGUI(GUI gui)
+    {
+        this.gui = gui;
+    }
     public void updateDisplay()
     {
         gui.redraw();
@@ -72,7 +74,8 @@ public class GUIController extends GameController
                 e.printStackTrace();
             }
         }
-        
+
+        System.out.println("gameType = " + gameType);
         return gameType;
     }
     
@@ -145,30 +148,6 @@ public class GUIController extends GameController
         waitingForInput = false;
         this.gameType = gameType;
     }
-
-//    public void actionPerformed(ActionEvent e)
-//    {
-//        JButton button = (JButton) e.getSource();
-//        gui.setWaitingForInput(false);
-//
-//        String name = button.getName();
-//        if(name == "playAgain")
-//        {
-//            playAgain = true;
-//            gui.clear();
-//            try
-//            {
-//                board.clear();
-//            }
-//            catch(Exception ex)
-//            {
-//            }
-//        }
-//        else
-//        {
-//            gameType = Integer.parseInt(button.getName()) + 1;
-//        }
-//    }
 
 }
 
