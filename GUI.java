@@ -38,16 +38,78 @@ public class GUI
                 
         for(int i = 0; i < 9; i++)
         {
-            JLabel square = new JLabel(" ");
-            square.setHorizontalAlignment(SwingConstants.CENTER);
-            square.setFont(new Font("Georgia", Font.PLAIN, 100));
-            square.setBorder(BorderFactory.createLineBorder(Color.black, 1));
-            square.setCursor(new Cursor(Cursor.HAND_CURSOR));
-            square.setName("" + i);
-            square.addMouseListener(guiController);
+            JLabel square = createLabel(i);
             jframe.add(square);
         }
         jframe.setVisible(true);
+    }
+
+    private JLabel createLabel(int i)
+    {
+        JLabel square = new JLabel(" ");
+        square.setHorizontalAlignment(SwingConstants.CENTER);
+        square.setFont(new Font("Georgia", Font.PLAIN, 100));
+        square.setBorder(BorderFactory.createLineBorder(Color.black, 1));
+        square.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        square.setName("" + i);
+        square.addMouseListener(new SquareLabel(i));
+        return square;
+    }
+
+    private class PlayAgainButton extends JButton implements ActionListener
+    {
+        public void actionPerformed(ActionEvent e)
+        {
+            guiController.playAgain(true);
+        }
+    }
+
+    private class GameTypeButton extends JButton implements ActionListener
+    {
+        private int index;
+        public GameTypeButton(int index)
+        {
+            super(" ");
+            this.index = index;
+        }
+
+        public void actionPerformed(ActionEvent e)
+        {
+            guiController.gameTypeChosen(index);
+        }
+    }
+
+    private class SquareLabel extends JLabel implements MouseListener
+    {
+        private int index;
+
+        public SquareLabel(int index)
+        {
+            super(" ");
+            this.index = index;
+        }
+
+
+        public void mouseClicked(MouseEvent e)
+        {
+        }
+
+        public void mousePressed(MouseEvent e)
+        {
+            guiController.squareChosen(index);
+        }
+
+        public void mouseReleased(MouseEvent e)
+        {
+        }
+
+        public void mouseEntered(MouseEvent e)
+        {
+        }
+
+        public void mouseExited(MouseEvent e)
+        {
+        }
     }
 
     public void clear()
@@ -115,7 +177,7 @@ public class GUI
             buttons[i] = new JButton("" + playerNames[0] + " (X) vs. " + playerNames[1] + " (O)");
 
             buttons[i].setName("" + i);
-            buttons[i].addActionListener(guiController);
+            buttons[i].addActionListener(new GameTypeButton(i));
             jframe.add(buttons[i]);
             i++;
         }
@@ -128,7 +190,7 @@ public class GUI
         content.setLayout(new GridLayout(4, 3));
 
         JButton playAgain = new JButton("Play Again");
-        playAgain.addActionListener(guiController);
+        playAgain.addActionListener(new PlayAgainButton());
         playAgain.setName("playAgain");
         jframe.add(playAgain);
 

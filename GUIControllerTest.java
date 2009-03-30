@@ -29,7 +29,7 @@ public class GUIControllerTest extends Assert
         gui = new GUI(guiController);
         mockGui = new MockGUI(guiController);
         
-        guiController.gui = gui;
+        guiController.gui = mockGui;
     }
 
     @Test
@@ -45,7 +45,6 @@ public class GUIControllerTest extends Assert
     @Test
     public void shouldRedrawGUIOnUpdateDisplay() throws Exception
     {
-        guiController.gui = mockGui;
         guiController.updateDisplay();
         assertEquals(true, mockGui.redrawCalled);
     }
@@ -53,38 +52,100 @@ public class GUIControllerTest extends Assert
     @Test
     public void shouldPrintInitialBoard() throws Exception
     {
-        guiController.gui = mockGui;
-
         guiController.printInitialBoard();
-        
+
+        assertEquals(true, mockGui.clearCalled);
+        assertEquals(true, mockGui.buildBoardCalled);
+        // uses updateDisplay(), so same test        
+        assertEquals(true, mockGui.redrawCalled);
+    }
+
+    @Test
+    public void shouldPrintFinalBoard() throws Exception
+    {
+        guiController.printFinalBoard();
+
+        assertEquals(true, mockGui.stopListeningCalled);
+        assertEquals(true, mockGui.addFinalMessageCalled);
+        // uses updateDisplay(), so same test
         assertEquals(true, mockGui.redrawCalled);
     }
 
     @Test
     public void shouldRequestUserMove() throws Exception
     {
-        guiController.gui = mockGui;
-        int squareChosen = -1;
+        final int[] squareChosen = new int[]{-1};
 
-        squareChosen = guiController.requestUserMove('X');
-
-        // TODO: how can I simulate actionPerformed() simultaneously? the execution here is consecutive
-
-        for(Component square : gui.jframe.getContentPane().getComponents())
-        {
-            if(square instanceof JLabel)
+        Thread thread = new Thread() {
+            public void run()
             {
-                clickOn(square);
-                squareChosen = Integer.parseInt(square.getName());
-//                System.out.println("squareChosen = " + squareChosen);
-                break;
+                squareChosen[0] = guiController.requestUserMove('X');
             }
-        }
-        
-        assertEquals(0, squareChosen);
+        };
+        thread.start();
 
+        Thread.sleep(101);
+        guiController.squareChosen(0);
+        
+        thread.join();
+
+        assertEquals(0, squareChosen[0]);
     }
 
+    @Test
+    public void shouldSetLastMoveOnSquareChosen() throws Exception
+    {
+        guiController.waitingForInput = true;
+        guiController.squareChosen(0);
+        assertEquals(false, guiController.waitingForInput);
+        assertEquals(0, guiController.lastMove);
+    }
+
+    @Test
+    public void shouldPlayAgain() throws Exception
+    {
+        final boolean[] playAgain = new boolean[]{false};
+
+
+        Thread thread = new Thread() {
+            public void run()
+            {
+                playAgain[0] = guiController.shouldPlayAgain();
+            }
+        };
+
+        thread.start();
+
+        Thread.sleep(101);
+        guiController.playAgain(true);
+
+        thread.join();
+
+        assertEquals(true, guiController.playAgain);
+    }
+
+    @Test
+    public void shouldChooseGameType() throws Exception
+    {
+        final int[] gameType = new int[]{-1};
+        
+        Thread thread = new Thread() {
+            public void run()
+            {
+                gameType[0] = guiController.requestGameType();
+            }
+        };
+
+        thread.start();
+
+        Thread.sleep(101);
+        guiController.gameTypeChosen(1);
+
+        thread.join();
+
+        assertEquals(1, guiController.gameType);
+    }
+    
     private void clickOn(Component component) throws AWTException
     {
         Robot robot = new Robot();

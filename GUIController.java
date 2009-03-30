@@ -11,13 +11,14 @@ import java.awt.event.ActionEvent;
  * Time: 9:12:49 AM
  * To change this template use File | Settings | File Templates.
  */
-public class GUIController extends GameController implements MouseListener, ActionListener
+public class GUIController extends GameController
 {
     protected GUI gui;
-    private int lastMove = -1;
-    private int gameType = -1;
+    public int lastMove = -1;
+    protected int gameType = -1;
     private char activeMark = 0;
-    private boolean playAgain = false;
+    public boolean playAgain = false;
+    public boolean waitingForInput = false;  
     
     public GUIController(Board board)
     {
@@ -64,11 +65,11 @@ public class GUIController extends GameController implements MouseListener, Acti
     
     protected int requestUserInput()
     {
-        gui.setWaitingForInput(true);
+        waitingForInput = true;
 
         boolean gameOver = board.gameOver();
 
-        while(gui.isWaitingForInput() && !gameOver)
+        while(waitingForInput && !gameOver)
         {
             try
             {
@@ -79,14 +80,14 @@ public class GUIController extends GameController implements MouseListener, Acti
                 e.printStackTrace();
             }
         }
-
+        
         return lastMove;
     }
 
     public boolean shouldPlayAgain()
     {
-        gui.setWaitingForInput(true);
-        while(gui.isWaitingForInput())
+        waitingForInput = true;
+        while(waitingForInput)
         {
             try
             {
@@ -101,50 +102,48 @@ public class GUIController extends GameController implements MouseListener, Acti
         return playAgain;
     }
 
-    public void mouseClicked(MouseEvent e)
+    public void squareChosen(int square)
     {
+        waitingForInput = false;
+        lastMove = square;
     }
 
-    public void mousePressed(MouseEvent e)
+
+    public void playAgain(boolean b)
     {
-        gui.setWaitingForInput(false);
-        lastMove = Integer.parseInt(e.getComponent().getName());
+        waitingForInput = false;
+        playAgain = b;
     }
 
-    public void mouseReleased(MouseEvent e)
+    public void gameTypeChosen(int gameType)
     {
+        waitingForInput = false;
+        this.gameType = gameType;
     }
 
-    public void mouseEntered(MouseEvent e)
-    {
-    }
+//    public void actionPerformed(ActionEvent e)
+//    {
+//        JButton button = (JButton) e.getSource();
+//        gui.setWaitingForInput(false);
+//
+//        String name = button.getName();
+//        if(name == "playAgain")
+//        {
+//            playAgain = true;
+//            gui.clear();
+//            try
+//            {
+//                board.clear();
+//            }
+//            catch(Exception ex)
+//            {
+//            }
+//        }
+//        else
+//        {
+//            gameType = Integer.parseInt(button.getName()) + 1;
+//        }
+//    }
 
-    public void mouseExited(MouseEvent e)
-    {
-    }
-
-    public void actionPerformed(ActionEvent e)
-    {
-        JButton button = (JButton) e.getSource();
-        gui.setWaitingForInput(false);
-
-        String name = button.getName();
-        if(name == "playAgain")
-        {
-            playAgain = true;
-            gui.clear();
-            try
-            {
-                board.clear();
-            }
-            catch(Exception ex)
-            {
-            }
-        }
-        else
-        {
-            gameType = Integer.parseInt(button.getName()) + 1;
-        }
-    }
 }
 
