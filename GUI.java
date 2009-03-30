@@ -1,5 +1,4 @@
 import javax.swing.*;
-import javax.swing.event.MouseInputAdapter;
 import java.awt.*;
 import java.awt.event.*;
 
@@ -12,91 +11,48 @@ import java.awt.event.*;
  */
 public class GUI
 {
-    private GUIController guiController;
-    private JLabel[] squares = new JLabel[9];
-    private int lastSquareClicked = -1;
-    private boolean waitingForInput = false;
-    private JFrame jframe = new JFrame();
 
-//    public static void main(String[] args)
+    protected GUIController guiController;
+    protected boolean waitingForInput = false;
+    protected JFrame jframe = new JFrame();
+    
     public GUI(final GUIController guiController)
     {
         this.guiController = guiController;
-        
+
         int windowWidth = 500;
         int windowHeight = 500;
 
         jframe.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-
-        Container content = jframe.getContentPane();
-
-        content.setLayout(new GridLayout(3, 3));
-
         jframe.setSize(windowWidth, windowHeight);
-
         jframe.setMaximizedBounds(new Rectangle());
         jframe.setBackground(Color.white);
 
-        buildBoard();
-
+        jframe.setVisible(true);
+    }
+    
+    protected void buildBoard()
+    {
+        jframe.getContentPane().removeAll();
+        jframe.setLayout(new GridLayout(3, 3));
+                
+        for(int i = 0; i < 9; i++)
+        {
+            JLabel square = new JLabel(" ");
+            square.setHorizontalAlignment(SwingConstants.CENTER);
+            square.setFont(new Font("Georgia", Font.PLAIN, 100));
+            square.setBorder(BorderFactory.createLineBorder(Color.black, 1));
+            square.setCursor(new Cursor(Cursor.HAND_CURSOR));
+            square.setName("" + i);
+            square.addMouseListener(guiController);
+            jframe.add(square);
+        }
         jframe.setVisible(true);
     }
 
-    private void clear()
+    public void clear()
     {
-        
-    }
-    
-    private void buildBoard()
-    {
-        int x;
-        for(int i = 0; i < 9; i++)
-        {
-            squares[i] = new JLabel(" ");
-            jframe.add(squares[i]);
-            squares[i].setBackground(new Color(255 - 5*i, 5*i, 5*i));
-            squares[i].setHorizontalAlignment(SwingConstants.CENTER);
-
-            squares[i].setFont(new Font("Georgia", Font.PLAIN, 100));
-            squares[i].setBorder(BorderFactory.createLineBorder(Color.black, 1));
-
-            final int squareIndex = i;
-            
-            squares[i].addMouseListener(new MouseInputAdapter(){
-                public void mousePressed(MouseEvent e)
-                {
-                    moveMade(squares[squareIndex], squareIndex, this);
-                }
-
-                public void mouseEntered(MouseEvent e)
-                {
-                    squares[squareIndex].setCursor(new Cursor(Cursor.HAND_CURSOR));
-                }
-            });
-        }
-    }
-
-    public void moveMade(JLabel square, int squareIndex, MouseInputAdapter inputListener)
-    {
-        if(guiController.board.isOccupied(squareIndex))
-        {
-            
-        }
-        else
-        {
-            guiController.setLastMove(squareIndex);
-            lastSquareClicked = squareIndex;
-            waitingForInput = false;
-            square.setText("" + guiController.getActiveMark());
-        }
-
-        square.removeMouseListener(inputListener);
-        square.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-    }
-
-    public int getLastSquareClicked()
-    {
-        return lastSquareClicked;
+        jframe.getContentPane().removeAll();
     }
 
     public void setWaitingForInput(boolean waiting)
@@ -112,64 +68,68 @@ public class GUI
     public void redraw()
     {
         char mark;
-        
-        for(int i = 0; i < 9; i++)
+        JLabel square;
+
+        for(Component component : jframe.getContentPane().getComponents())
         {
-            mark = guiController.board.charAt(i);
-            if(mark != 0)
+            if(component instanceof JLabel)
             {
-                squares[i].setText("" + mark);
+                square = (JLabel)component;
+                int squareNumber = Integer.parseInt(square.getName());
+                mark = guiController.board.charAt(squareNumber);
+                if(mark != 0)
+                    square.setText("" + mark);
             }
         }
     }
 
     public void stopListening()
     {
-        for(JLabel square : squares)
+        JLabel square;
+        for(Component component : jframe.getContentPane().getComponents())
         {
-            for(MouseListener listener : square.getMouseListeners())
+            if(component instanceof JLabel)
             {
-                square.removeMouseListener(listener);
-                square.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+                square = (JLabel) component;
+
+                for(MouseListener listener : square.getMouseListeners())
+                {
+                    square.removeMouseListener(listener);
+                    square.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+                }
             }
         }
     }
 
-    public int requestGameType()
+    public void buildGameTypeChoices()
     {
-        Container content = jframe.getContentPane();
-        content.removeAll();
-        
-        content.setLayout(new BoxLayout(content, BoxLayout.Y_AXIS));
-        
-        JButton computerVComputerButton = new JButton("Computer (X) vs. Computer (O)");
-        computerVComputerButton.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent e)
-            {
-                
-            }
-        });
-        jframe.add(computerVComputerButton);
+        JButton[] buttons = new JButton[4];
 
-        JButton humanVComputerButton = new JButton("Human (X) vs. Computer (O)");
-        jframe.add(humanVComputerButton);
+        int i = 0;
 
-        JButton computerVHumanButton = new JButton("Computer (X) vs. Human (O)");
-        jframe.add(computerVHumanButton);
+        jframe.setLayout(new GridLayout(2, 2));
+        for(PlayerFactory.GameType gameType : PlayerFactory.GameType.values())
+        {
+            // relies on naming convention _V_ between player types
+            String[] playerNames = gameType.toString().split("_V_");
+            buttons[i] = new JButton("" + playerNames[0] + " (X) vs. " + playerNames[1] + " (O)");
 
-        JButton humanVHumanButton = new JButton("Human (X) vs. Human (O)");
-        jframe.add(humanVHumanButton);
-
+            buttons[i].setName("" + i);
+            buttons[i].addActionListener(guiController);
+            jframe.add(buttons[i]);
+            i++;
+        }
         jframe.setVisible(true);
-        
-        try
-        {
-            Thread.sleep(40000);
-        }
-        catch (InterruptedException e)
-        {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        }
-        return -1;
     }
+
+    public void addFinalMessage()
+    {
+        jframe.setLayout(new GridLayout(4, 3));
+
+        JButton playAgain = new JButton("Play Again");
+        playAgain.addActionListener(guiController);
+        playAgain.setName("playAgain");
+        jframe.add(playAgain);
+    }
+
 }

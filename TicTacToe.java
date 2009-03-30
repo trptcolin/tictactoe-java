@@ -14,16 +14,19 @@ public class TicTacToe
 
         Player player1, player2;
 
-        int gameType = gameController.requestGameType();
-        player1 = PlayerFactory.createPlayer(board, 'X', gameController, gameType);
-        player2 = PlayerFactory.createPlayer(board, 'O', gameController, gameType);
-
-        Game game = new Game(board, gameController, player1, player2);
+        int gameType;
+        Game game;
 
         boolean playAgain = true;
 
         while(playAgain)
         {
+            gameType = gameController.requestGameType();
+            player1 = PlayerFactory.createPlayer(board, 'X', gameController, gameType);
+            player2 = PlayerFactory.createPlayer(board, 'O', gameController, gameType);
+
+            game = new Game(board, gameController, player1, player2);
+            
             playAgain = game.play();
         }
     }

@@ -28,6 +28,7 @@ public class Game
         Player[] players = { player1, player2 };
         int turn = 0;
 
+//        System.out.println("starting a game");
         while(!board.gameOver())
         {
             if(board.empty())

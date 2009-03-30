@@ -11,7 +11,7 @@ import java.io.*;
  * Time: 3:40:15 PM
  * To change this template use File | Settings | File Templates.
  */
-public class ConsoleDisplayTest extends Assert
+public class ConsoleControllerTest extends Assert
 {
     private ConsoleController gameDisplay;
     private Board board;
