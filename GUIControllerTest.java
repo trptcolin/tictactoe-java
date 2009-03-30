@@ -140,18 +140,9 @@ public class GUIControllerTest extends Assert
 
         Thread.sleep(101);
         guiController.gameTypeChosen(1);
-
         thread.join();
 
         assertEquals(1, guiController.gameType);
-    }
-    
-    private void clickOn(Component component) throws AWTException
-    {
-        Robot robot = new Robot();
-        robot.setAutoWaitForIdle(true);
-        robot.mouseMove(component.getX() + 10, component.getY() + 10);
-        robot.mousePress(MouseEvent.BUTTON1_MASK);
-        robot.mouseRelease(MouseEvent.BUTTON1_MASK);
+        assertEquals(false, board.gameOver());
     }
 }

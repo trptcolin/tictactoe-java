@@ -75,7 +75,7 @@ public class GUI
 
         public void actionPerformed(ActionEvent e)
         {
-            guiController.gameTypeChosen(index);
+            guiController.gameTypeChosen(index + 1);
         }
     }
 
@@ -176,7 +176,7 @@ public class GUI
             String[] playerNames = gameType.toString().split("_V_");
             buttons[i] = new JButton("" + playerNames[0] + " (X) vs. " + playerNames[1] + " (O)");
 
-            buttons[i].setName("" + i);
+            buttons[i].setName("" + (i - 1));
             buttons[i].addActionListener(new GameTypeButton(i));
             jframe.add(buttons[i]);
             i++;

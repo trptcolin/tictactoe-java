@@ -16,7 +16,7 @@ public class GUIController extends GameController
     protected GUI gui;
     public int lastMove = -1;
     protected int gameType = -1;
-    private char activeMark = 0;
+//    private char activeMark = 0;
     public boolean playAgain = false;
     public boolean waitingForInput = false;  
     
@@ -59,7 +59,20 @@ public class GUIController extends GameController
     {
         gui.clear();
         gui.buildGameTypeChoices();
-        requestUserInput();
+
+        waitingForInput = true;
+        while(waitingForInput)
+        {
+            try
+            {
+                Thread.sleep(100);
+            }
+            catch(Exception e)
+            {
+                e.printStackTrace();
+            }
+        }
+        
         return gameType;
     }
     
@@ -94,6 +107,18 @@ public class GUIController extends GameController
                 Thread.sleep(100);
             }
             catch(Exception e)
+            {
+                e.printStackTrace();
+            }
+        }
+
+        if(playAgain)
+        {
+            try
+            {
+                board.clear();
+            }
+            catch (Exception e)
             {
                 e.printStackTrace();
             }
