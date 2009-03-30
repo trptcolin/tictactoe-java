@@ -107,7 +107,7 @@ public class GUI
 
         int i = 0;
 
-        jframe.setLayout(new GridLayout(2, 2));
+        jframe.getContentPane().setLayout(new GridLayout(2, 2));
         for(PlayerFactory.GameType gameType : PlayerFactory.GameType.values())
         {
             // relies on naming convention _V_ between player types
@@ -124,12 +124,15 @@ public class GUI
 
     public void addFinalMessage()
     {
-        jframe.setLayout(new GridLayout(4, 3));
+        Container content = jframe.getContentPane();
+        content.setLayout(new GridLayout(4, 3));
 
         JButton playAgain = new JButton("Play Again");
         playAgain.addActionListener(guiController);
         playAgain.setName("playAgain");
         jframe.add(playAgain);
+
+        jframe.setSize(500, 600);
     }
 
 }

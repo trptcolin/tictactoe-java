@@ -56,6 +56,7 @@ public class GUIController extends GameController implements MouseListener, Acti
 
     public int requestGameType()
     {
+        gui.clear();
         gui.buildGameTypeChoices();
         requestUserInput();
         return gameType;
@@ -108,7 +109,6 @@ public class GUIController extends GameController implements MouseListener, Acti
     {
         gui.setWaitingForInput(false);
         lastMove = Integer.parseInt(e.getComponent().getName());
-
     }
 
     public void mouseReleased(MouseEvent e)
@@ -132,6 +132,7 @@ public class GUIController extends GameController implements MouseListener, Acti
         if(name == "playAgain")
         {
             playAgain = true;
+            gui.clear();
             try
             {
                 board.clear();
@@ -139,8 +140,6 @@ public class GUIController extends GameController implements MouseListener, Acti
             catch(Exception ex)
             {
             }
-            gui.clear();
-                        
         }
         else
         {

@@ -42,7 +42,6 @@ public class Game
             }
             catch(Exception e)
             {
-                System.out.println("There was a problem!");
                 e.printStackTrace();
             }
             turn++;

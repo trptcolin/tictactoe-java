@@ -76,7 +76,7 @@ public class GUIControllerTest extends Assert
             {
                 clickOn(square);
                 squareChosen = Integer.parseInt(square.getName());
-                System.out.println("squareChosen = " + squareChosen);
+//                System.out.println("squareChosen = " + squareChosen);
                 break;
             }
         }
