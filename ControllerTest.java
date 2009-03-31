@@ -9,61 +9,60 @@ import org.junit.Before;
  * Time: 10:42:42 PM
  * To change this template use File | Settings | File Templates.
  */
-public class GUIControllerTest extends Assert
+public class ControllerTest extends Assert
 {
     private Board board;
-    private GUIController guiController;
-//    private SwingGUI swingGui;
-    private MockGUI mockGui;
+    private Controller controller;
+    private MockView mockView;
 
     @Before
     public void setup()
     {
         board = new MockBoard();
-        guiController = new GUIController(board);
-        mockGui = new MockGUI(guiController);
+        controller = new Controller(board);
+        mockView = new MockView(controller);
 
-        guiController.gui = mockGui;
+        controller.view = mockView;
     }
 
     @Test
     public void shouldSetGUI() throws Exception
     {
-        MockGUI newMockGui = new MockGUI(guiController);
-        guiController.gui = newMockGui;
-        assertEquals(newMockGui, guiController.gui);
+        MockView newMockView = new MockView(controller);
+        controller.view = newMockView;
+        assertEquals(newMockView, controller.view);
 
-        guiController.gui = mockGui;
-        assertEquals(mockGui, guiController.gui);
+        controller.view = mockView;
+        assertEquals(mockView, controller.view);
     }
 
     @Test
     public void shouldRedrawGUIOnUpdateDisplay() throws Exception
     {
-        guiController.updateDisplay();
-        assertEquals(true, mockGui.redrawCalled);
+        controller.updateDisplay();
+        assertEquals(true, mockView.redrawCalled);
     }
 
     @Test
     public void shouldPrintInitialBoard() throws Exception
     {
-        guiController.printInitialBoard();
+        controller.printInitialBoard();
 
-        assertEquals(true, mockGui.clearCalled);
-        assertEquals(true, mockGui.buildBoardCalled);
+        assertEquals(true, mockView.clearCalled);
+        assertEquals(true, mockView.buildBoardCalled);
         // uses updateDisplay(), so same test
-        assertEquals(true, mockGui.redrawCalled);
+        assertEquals(true, mockView.redrawCalled);
     }
 
     @Test
     public void shouldPrintFinalBoard() throws Exception
     {
-        guiController.printFinalBoard();
+        controller.printFinalBoard();
 
-        assertEquals(true, mockGui.stopListeningCalled);
-        assertEquals(true, mockGui.addFinalMessageCalled);
+        assertEquals(true, mockView.stopListeningCalled);
+        assertEquals(true, mockView.addFinalMessageCalled);
         // uses updateDisplay(), so same test
-        assertEquals(true, mockGui.redrawCalled);
+        assertEquals(true, mockView.redrawCalled);
     }
 
     @Test
@@ -74,13 +73,13 @@ public class GUIControllerTest extends Assert
         Thread thread = new Thread() {
             public void run()
             {
-                squareChosen[0] = guiController.requestUserMove('X');
+                squareChosen[0] = controller.requestUserMove('X');
             }
         };
         thread.start();
 
         Thread.sleep(101);
-        guiController.squareChosen(0);
+        controller.squareChosen(0);
 
         thread.join();
 
@@ -90,10 +89,10 @@ public class GUIControllerTest extends Assert
     @Test
     public void shouldSetLastMoveOnSquareChosen() throws Exception
     {
-        guiController.waitingForInput = true;
-        guiController.squareChosen(0);
-        assertEquals(false, guiController.waitingForInput);
-        assertEquals(0, guiController.lastMove);
+        controller.waitingForInput = true;
+        controller.squareChosen(0);
+        assertEquals(false, controller.waitingForInput);
+        assertEquals(0, controller.lastMove);
     }
 
     @Test
@@ -105,18 +104,18 @@ public class GUIControllerTest extends Assert
         Thread thread = new Thread() {
             public void run()
             {
-                playAgain[0] = guiController.shouldPlayAgain();
+                playAgain[0] = controller.shouldPlayAgain();
             }
         };
 
         thread.start();
 
         Thread.sleep(101);
-        guiController.playAgain(true);
+        controller.playAgain(true);
 
         thread.join();
 
-        assertEquals(true, guiController.playAgain);
+        assertEquals(true, controller.playAgain);
     }
 
     @Test
@@ -127,17 +126,17 @@ public class GUIControllerTest extends Assert
         Thread thread = new Thread() {
             public void run()
             {
-                gameType[0] = guiController.requestGameType();
+                gameType[0] = controller.requestGameType();
             }
         };
 
         thread.start();
 
         Thread.sleep(101);
-        guiController.gameTypeChosen(1);
+        controller.gameTypeChosen(1);
         thread.join();
 
-        assertEquals(1, guiController.gameType);
+        assertEquals(1, controller.gameType);
         assertEquals(false, board.gameOver());
     }
 }

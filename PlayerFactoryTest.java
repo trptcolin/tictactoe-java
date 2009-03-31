@@ -18,7 +18,7 @@ public class PlayerFactoryTest extends Assert
     public void setup()
     {
         board = new Board();
-        gameController = new ConsoleController(board);
+        gameController = new MockGameController(board);
     }
 
     @Test

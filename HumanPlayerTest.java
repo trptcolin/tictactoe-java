@@ -13,32 +13,32 @@ public class HumanPlayerTest extends Assert
 {
     MockBoard board;
     char mark;
-    MockGameController gameDisplay;
+    MockGameController controller;
     HumanPlayer humanPlayer;
 
     @Before
     public void setup()
     {
         board = new MockBoard();
-        gameDisplay = new MockGameController(board);
+        controller = new MockGameController(board);
         mark = 'X';
-        humanPlayer = new HumanPlayer(board, mark, gameDisplay);
+        humanPlayer = new HumanPlayer(board, mark, controller);
     }
 
     @Test
     public void shouldHaveGameDisplay() throws Exception
     {
-        assertEquals(gameDisplay, humanPlayer.gameController);
+        assertEquals(controller, humanPlayer.gameController);
     }
 
     @Test
     public void shouldGetMoveFromGameDisplayAndPopulateBoard() throws Exception
     {
         humanPlayer.makeMove();
-        assertEquals(true, gameDisplay.requestUserMoveCalled);
+        assertEquals(true, controller.requestUserMoveCalled);
 
         assertEquals(true, board.populateCalled);
         assertEquals(mark, board.populatedMark);
-        assertEquals(gameDisplay.userPositionGiven, board.populatedPosition);
+        assertEquals(controller.userPositionGiven, board.populatedPosition);
     }
 }

@@ -38,13 +38,6 @@ public abstract class Player
        return mark == 'X' ? 'O' : 'X';
     }
 
-//    public int[] possibleMoves()
-//    {
-//        int[] possibleMoves = new int[8];
-//        return possibleMoves;
-//    }
-//
-
     public List<Board> possibleResultingBoards(Board board) throws Exception
     {
         List<Board> resultingBoards = new ArrayList<Board>();

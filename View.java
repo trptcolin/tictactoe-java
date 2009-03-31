@@ -11,7 +11,7 @@ import java.awt.event.MouseEvent;
  * Date: Mar 30, 2009
  * Time: 1:12:34 PM
  */
-public interface GUI
+public interface View
 {
     public void clear();
     public void redraw();
@@ -21,4 +21,6 @@ public interface GUI
     public void addFinalMessage();
 
     public void stopListening();
+
+    public void getUserMove(char mark);
 }

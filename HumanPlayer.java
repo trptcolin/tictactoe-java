@@ -15,9 +15,30 @@ public class HumanPlayer extends Player
         this.gameController = gameController;
     }
 
-    public void makeMove() throws Exception
+    public void makeMove()
     {
-        int position = gameController.requestUserMove(mark);
-        board.populate(mark, position);
+        int position;
+        boolean legalMove = false;
+        while(!legalMove)
+        {
+            position = gameController.requestUserMove(mark);
+            
+            if(board.isOccupied(position))
+            {
+                gameController.updateDisplay();
+            }
+            else
+            {
+                try
+                {
+                    board.populate(mark, position);
+                    legalMove = true;
+                }
+                catch(Exception e)
+                {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 }

@@ -1,6 +1,3 @@
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-
 /**
  * Created by IntelliJ IDEA.
  * User: 8thlight
@@ -11,6 +8,7 @@ import java.io.InputStreamReader;
 public abstract class GameController
 {
     protected Board board;
+    protected View view;
 
     public GameController(Board board)
     {
@@ -33,9 +31,8 @@ public abstract class GameController
 
     public abstract int requestUserMove(char mark);
     public abstract int requestGameType();
-//    protected abstract int requestUserInput();
 
     public abstract boolean shouldPlayAgain();
 
-    public abstract void setGUI(GUI gui);
+    public abstract void setGUI(View view);
 }

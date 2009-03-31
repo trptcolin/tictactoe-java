@@ -58,7 +58,7 @@ public class MockGameController extends GameController
         return false;
     }
 
-    public void setGUI(GUI gui)
+    public void setGUI(View view)
     {
     }
 }

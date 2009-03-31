@@ -12,12 +12,12 @@ public class ConsoleViewTest extends Assert
 {
     private Board board;
     private ConsoleView consoleView;
-    private GUIController controller;
+    private Controller controller;
 
     @Before
     public void setup()
     {
-        controller = new GUIController(new Board());
+        controller = new Controller(new Board());
         consoleView = new ConsoleView(controller);
         board = controller.board;
     }
@@ -54,5 +54,5 @@ public class ConsoleViewTest extends Assert
     }
 
 
-    
+
 }

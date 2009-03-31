@@ -9,14 +9,14 @@ import java.awt.event.*;
  * Time: 3:50:11 PM
  * To change this template use File | Settings | File Templates.
  */
-public class SwingGUI implements GUI
+public class SwingView implements View
 {
-    protected GUIController guiController;
+    protected Controller controller;
     protected JFrame jframe = new JFrame();
-    
-    public SwingGUI(final GUIController guiController)
+
+    public SwingView(final Controller controller)
     {
-        this.guiController = guiController;
+        this.controller = controller;
 
         int windowWidth = 500;
         int windowHeight = 500;
@@ -58,7 +58,7 @@ public class SwingGUI implements GUI
     {
         public void actionPerformed(ActionEvent e)
         {
-            guiController.playAgain(true);
+            controller.playAgain(true);
         }
     }
 
@@ -73,7 +73,7 @@ public class SwingGUI implements GUI
 
         public void actionPerformed(ActionEvent e)
         {
-            guiController.gameTypeChosen(index + 1);
+            controller.gameTypeChosen(index + 1);
         }
     }
 
@@ -94,7 +94,7 @@ public class SwingGUI implements GUI
 
         public void mousePressed(MouseEvent e)
         {
-            guiController.squareChosen(index);
+            controller.squareChosen(index);
         }
 
         public void mouseReleased(MouseEvent e)
@@ -126,7 +126,7 @@ public class SwingGUI implements GUI
             {
                 square = (JLabel)component;
                 int squareNumber = Integer.parseInt(square.getName());
-                mark = guiController.board.charAt(squareNumber);
+                mark = controller.board.charAt(squareNumber);
                 if(mark != 0)
                     square.setText("" + mark);
             }
@@ -149,6 +149,10 @@ public class SwingGUI implements GUI
                 }
             }
         }
+    }
+
+    public void getUserMove(char mark)
+    {
     }
 
     public void buildGameTypeChoices()

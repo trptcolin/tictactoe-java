@@ -5,16 +5,16 @@
  * Time: 9:12:49 AM
  * To change this template use File | Settings | File Templates.
  */
-public class GUIController extends GameController
+public class Controller extends GameController
 {
-    protected GUI gui;
+    protected View view;
     
     public int lastMove = -1;
     protected int gameType = -1;
     public boolean playAgain = false;
     public boolean waitingForInput = false;
 
-    public GUIController(Board board)
+    public Controller(Board board)
     {
         super(board);
     }
@@ -24,26 +24,26 @@ public class GUIController extends GameController
         return board.charAt(spot);
     }
 
-    public void setGUI(GUI gui)
+    public void setGUI(View view)
     {
-        this.gui = gui;
+        this.view = view;
     }
     public void updateDisplay()
     {
-        gui.redraw();
+        view.redraw();
     }
 
     public void printInitialBoard()
     {
-        gui.clear();
-        gui.buildBoard();
+        view.clear();
+        view.buildBoard();
         updateDisplay();
     }
 
     public void printFinalBoard()
     {
-        gui.stopListening();
-        gui.addFinalMessage();
+        view.stopListening();
+        view.addFinalMessage();
         updateDisplay();
     }
 
@@ -54,13 +54,13 @@ public class GUIController extends GameController
 
     public int requestUserMove(char mark)
     {
-        return requestUserInput();
+        return requestUserInput(mark);
     }
 
     public int requestGameType()
     {
-        gui.clear();
-        gui.buildGameTypeChoices();
+        view.clear();
+        view.buildGameTypeChoices();
 
         waitingForInput = true;
         while(waitingForInput)
@@ -75,16 +75,17 @@ public class GUIController extends GameController
             }
         }
 
-        System.out.println("gameType = " + gameType);
         return gameType;
     }
     
-    protected int requestUserInput()
+    protected int requestUserInput(char mark)
     {
         waitingForInput = true;
 
         boolean gameOver = board.gameOver();
 
+        view.getUserMove(mark);
+        
         while(waitingForInput && !gameOver)
         {
             try

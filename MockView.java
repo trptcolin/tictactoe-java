@@ -4,7 +4,7 @@
  * Date: Mar 29, 2009
  * Time: 12:01:56 PM
  */
-public class MockGUI implements GUI
+public class MockView implements View
 {
     public boolean redrawCalled = false;
     public boolean clearCalled = false;
@@ -15,11 +15,8 @@ public class MockGUI implements GUI
     public boolean setWaitingForInputCalled = false;
     public boolean setWaitingForInputCalledWith = false;
 
-    private GUIController guiController;
-
-    public MockGUI(final GUIController guiController)
+    public MockView(Controller controller)
     {
-        this.guiController = guiController;
     }
 
     public void redraw()
@@ -45,6 +42,10 @@ public class MockGUI implements GUI
     public void stopListening()
     {
         stopListeningCalled = true;
+    }
+
+    public void getUserMove(char mark)
+    {
     }
 
     public void addFinalMessage()
