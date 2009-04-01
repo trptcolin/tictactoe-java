@@ -9,11 +9,11 @@ import java.io.InputStreamReader;
  */
 public class ConsoleView implements View
 {
-    private Controller controller;
+    private ConcreteController controller;
 
-    public ConsoleView(GameController controller)
+    public ConsoleView(Controller controller)
     {
-        this.controller = (Controller)controller;
+        this.controller = (ConcreteController)controller;
     }
 
     public void clear()

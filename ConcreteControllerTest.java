@@ -9,17 +9,17 @@ import org.junit.Before;
  * Time: 10:42:42 PM
  * To change this template use File | Settings | File Templates.
  */
-public class ControllerTest extends Assert
+public class ConcreteControllerTest extends Assert
 {
     private Board board;
-    private Controller controller;
+    private ConcreteController controller;
     private MockView mockView;
 
     @Before
     public void setup()
     {
         board = new MockBoard();
-        controller = new Controller(board);
+        controller = new ConcreteController(board);
         mockView = new MockView(controller);
 
         controller.view = mockView;

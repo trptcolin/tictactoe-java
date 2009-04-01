@@ -15,7 +15,7 @@ public class MockView implements View
     public boolean setWaitingForInputCalled = false;
     public boolean setWaitingForInputCalledWith = false;
 
-    public MockView(Controller controller)
+    public MockView(ConcreteController controller)
     {
     }
 

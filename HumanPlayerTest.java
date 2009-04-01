@@ -13,14 +13,14 @@ public class HumanPlayerTest extends Assert
 {
     MockBoard board;
     char mark;
-    MockGameController controller;
+    MockController controller;
     HumanPlayer humanPlayer;
 
     @Before
     public void setup()
     {
         board = new MockBoard();
-        controller = new MockGameController(board);
+        controller = new MockController(board);
         mark = 'X';
         humanPlayer = new HumanPlayer(board, mark, controller);
     }
@@ -28,7 +28,7 @@ public class HumanPlayerTest extends Assert
     @Test
     public void shouldHaveGameDisplay() throws Exception
     {
-        assertEquals(controller, humanPlayer.gameController);
+        assertEquals(controller, humanPlayer.controller);
     }
 
     @Test

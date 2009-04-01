@@ -23,7 +23,6 @@ public class SwingView implements View
 
         jframe.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         jframe.setSize(windowWidth, windowHeight);
-        jframe.setMaximizedBounds(new Rectangle());
         jframe.setBackground(Color.white);
 
         jframe.setVisible(true);
@@ -52,6 +51,40 @@ public class SwingView implements View
         square.setName("" + i);
         square.addMouseListener(new SquareLabel(i));
         return square;
+    }
+
+    public void buildGameTypeChoices()
+    {
+        JButton[] buttons = new JButton[4];
+
+        int i = 0;
+
+        jframe.getContentPane().setLayout(new GridLayout(2, 2));
+        for(PlayerFactory.GameType gameType : PlayerFactory.GameType.values())
+        {
+            // relies on naming convention _V_ between player types
+            String[] playerNames = gameType.toString().split("_V_");
+            buttons[i] = new JButton("" + playerNames[0] + " (X) vs. " + playerNames[1] + " (O)");
+
+            buttons[i].setName("" + (i - 1));
+            buttons[i].addActionListener(new GameTypeButton(i));
+            jframe.add(buttons[i]);
+            i++;
+        }
+        jframe.setVisible(true);
+    }
+
+    public void addFinalMessage()
+    {
+        Container content = jframe.getContentPane();
+        content.setLayout(new GridLayout(4, 3));
+
+        JButton playAgain = new JButton("Play Again");
+        playAgain.addActionListener(new PlayAgainButton());
+        playAgain.setName("playAgain");
+        jframe.add(playAgain);
+
+        jframe.setSize(500, 600);
     }
 
     private class PlayAgainButton extends JButton implements ActionListener
@@ -126,7 +159,7 @@ public class SwingView implements View
             {
                 square = (JLabel)component;
                 int squareNumber = Integer.parseInt(square.getName());
-                mark = controller.board.charAt(squareNumber);
+                mark = controller.charAt(squareNumber);
                 if(mark != 0)
                     square.setText("" + mark);
             }
@@ -154,39 +187,4 @@ public class SwingView implements View
     public void getUserMove(char mark)
     {
     }
-
-    public void buildGameTypeChoices()
-    {
-        JButton[] buttons = new JButton[4];
-
-        int i = 0;
-
-        jframe.getContentPane().setLayout(new GridLayout(2, 2));
-        for(PlayerFactory.GameType gameType : PlayerFactory.GameType.values())
-        {
-            // relies on naming convention _V_ between player types
-            String[] playerNames = gameType.toString().split("_V_");
-            buttons[i] = new JButton("" + playerNames[0] + " (X) vs. " + playerNames[1] + " (O)");
-
-            buttons[i].setName("" + (i - 1));
-            buttons[i].addActionListener(new GameTypeButton(i));
-            jframe.add(buttons[i]);
-            i++;
-        }
-        jframe.setVisible(true);
-    }
-
-    public void addFinalMessage()
-    {
-        Container content = jframe.getContentPane();
-        content.setLayout(new GridLayout(4, 3));
-
-        JButton playAgain = new JButton("Play Again");
-        playAgain.addActionListener(new PlayAgainButton());
-        playAgain.setName("playAgain");
-        jframe.add(playAgain);
-
-        jframe.setSize(500, 600);
-    }
-
 }

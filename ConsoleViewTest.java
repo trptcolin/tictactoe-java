@@ -12,12 +12,12 @@ public class ConsoleViewTest extends Assert
 {
     private Board board;
     private ConsoleView consoleView;
-    private Controller controller;
+    private ConcreteController controller;
 
     @Before
     public void setup()
     {
-        controller = new Controller(new Board());
+        controller = new ConcreteController(new Board());
         consoleView = new ConsoleView(controller);
         board = controller.board;
     }
@@ -52,7 +52,4 @@ public class ConsoleViewTest extends Assert
             " X | X | X \n",
             consoleView.boardToString());
     }
-
-
-
 }

@@ -7,12 +7,12 @@
  */
 public class HumanPlayer extends Player
 {
-    GameController gameController;
+    Controller controller;
 
-    public HumanPlayer(Board board, char mark, GameController gameController)
+    public HumanPlayer(Board board, char mark, Controller controller)
     {
         super(board, mark);
-        this.gameController = gameController;
+        this.controller = controller;
     }
 
     public void makeMove()
@@ -21,11 +21,11 @@ public class HumanPlayer extends Player
         boolean legalMove = false;
         while(!legalMove)
         {
-            position = gameController.requestUserMove(mark);
+            position = controller.requestUserMove(mark);
             
             if(board.isOccupied(position))
             {
-                gameController.updateDisplay();
+                controller.updateDisplay();
             }
             else
             {

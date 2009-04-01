@@ -10,9 +10,9 @@ public class Game
     private Board board;
     private Player player1;
     private Player player2;
-    private GameController gameController;
+    private Controller controller;
 
-    public Game(Board board, GameController gameController, Player player1, Player player2)
+    public Game(Board board, Controller controller, Player player1, Player player2)
     {
         this.board = board;
 
@@ -20,7 +20,7 @@ public class Game
         this.player2 = player2;
         player1.setOtherPlayer(player2);
 
-        this.gameController = gameController;
+        this.controller = controller;
     }
 
     public boolean play()
@@ -31,9 +31,9 @@ public class Game
         while(!board.gameOver())
         {
             if(board.empty())
-                gameController.printInitialBoard();
+                controller.printInitialBoard();
             else
-                gameController.updateDisplay();
+                controller.updateDisplay();
 
             try
             {
@@ -47,8 +47,8 @@ public class Game
             turn++;
         }
 
-        gameController.printFinalBoard();
+        controller.printFinalBoard();
 
-        return gameController.shouldPlayAgain();
+        return controller.shouldPlayAgain();
     }
 }

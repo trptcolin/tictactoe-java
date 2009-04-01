@@ -16,7 +16,7 @@ public class PlayerFactory
         Human_V_Human
     }
 
-    public static Player createPlayer(Board board, char mark, GameController gameController, int gameTypeCode)
+    public static Player createPlayer(Board board, char mark, Controller controller, int gameTypeCode)
     {
         Player player;
         GameType gameType = GameType.Computer_V_Computer;
@@ -36,16 +36,16 @@ public class PlayerFactory
                 if(mark == 'X')
                     player = new ComputerPlayer(board, mark);
                 else
-                    player = new HumanPlayer(board, mark, gameController);
+                    player = new HumanPlayer(board, mark, controller);
                 break;
             case Human_V_Computer:
                 if(mark == 'X')
-                    player = new HumanPlayer(board, mark, gameController);
+                    player = new HumanPlayer(board, mark, controller);
                 else
                     player = new ComputerPlayer(board, mark);
                 break;
             case Human_V_Human:
-                player = new HumanPlayer(board, mark, gameController);
+                player = new HumanPlayer(board, mark, controller);
                 break;
             default:
                 player = new ComputerPlayer(board, mark);
