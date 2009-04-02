@@ -10,8 +10,8 @@ public class TicTacToe
     public static void main(String[] args)
     {
         Board board = new Board();
-        Controller gameController = new ConcreteController(board);
-        gameController.setGUI(new ConsoleView(gameController));
+        Controller gameController = new ControllerImpl(board);
+        gameController.setUI(new ConsoleView(gameController));
         
         Player player1, player2;
 

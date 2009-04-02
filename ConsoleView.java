@@ -9,11 +9,13 @@ import java.io.InputStreamReader;
  */
 public class ConsoleView implements View
 {
-    private ConcreteController controller;
+    private Controller controller;
+    private Board board;
 
-    public ConsoleView(Controller controller)
+    public ConsoleView(Controller controller, Board board)
     {
-        this.controller = (ConcreteController)controller;
+        this.controller = controller;
+        this.board = board;
     }
 
     public void clear()
@@ -24,7 +26,7 @@ public class ConsoleView implements View
     public void redraw()
     {
         System.out.println(boardToString());
-        if(controller.board.gameOver())
+        if(board.gameOver())
         {
             System.out.println("Press any key to play again.");
         }
@@ -93,8 +95,8 @@ public class ConsoleView implements View
                             if(br.readLine() != null)
                             {
                                 move = 0;
-                                controller.waitingForInput = false;
-                                controller.playAgain = true;
+                                controller.setWaitingForInput(false);
+                                controller.setPlayAgain(true);
                                 return;
                             }
                         }
@@ -109,11 +111,11 @@ public class ConsoleView implements View
                         {
                             moveInput = br.readLine();
                             move = Integer.parseInt(moveInput);
-                            if(!controller.board.isOccupied(move - 1))
+                            if(!board.isOccupied(move - 1))
                             {
-                                controller.waitingForInput = false;
-                                controller.gameType = move;
-                                controller.lastMove = move - 1;
+                                controller.setWaitingForInput(false);
+                                controller.setGameType(move);
+                                controller.setLastMove(move - 1);
                             }
                             else
                             {
@@ -140,8 +142,8 @@ public class ConsoleView implements View
     public void addFinalMessage()
     {
         String endMessage = "";
-        if(controller.board.isWon())
-            endMessage += "Player " + controller.board.getWinner() + " was the winner!";
+        if(board.isWon())
+            endMessage += "Player " + board.getWinner() + " was the winner!";
         else
             endMessage +="It was a tie!";
 

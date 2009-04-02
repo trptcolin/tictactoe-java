@@ -8,6 +8,7 @@
 public interface Controller
 {
     char charAt(int position);
+    String boardToString();
 
     void updateDisplay();
     void printInitialBoard();
@@ -18,8 +19,13 @@ public interface Controller
 
     boolean shouldPlayAgain();
 
-    void setGUI(View view);
+    void setUI(View view);
     void gameTypeChosen(int gameType);
     void squareChosen(int square);
     void playAgain(boolean b);
+
+    void setWaitingForInput(boolean b);
+    void setPlayAgain(boolean b);
+    void setGameType(int i);
+    void setLastMove(int move);
 }

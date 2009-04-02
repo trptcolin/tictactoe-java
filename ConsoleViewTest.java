@@ -12,14 +12,14 @@ public class ConsoleViewTest extends Assert
 {
     private Board board;
     private ConsoleView consoleView;
-    private ConcreteController controller;
+    private ControllerImpl controller;
 
     @Before
     public void setup()
     {
-        controller = new ConcreteController(new Board());
-        consoleView = new ConsoleView(controller);
+        controller = new ControllerImpl(new Board());
         board = controller.board;
+        consoleView = new ConsoleView(controller, board);
     }
 
     @Test

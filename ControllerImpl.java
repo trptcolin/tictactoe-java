@@ -5,7 +5,7 @@
  * Time: 9:12:49 AM
  * To change this template use File | Settings | File Templates.
  */
-public class ConcreteController implements Controller
+public class ControllerImpl implements Controller
 {
     protected Board board;
     protected View view;
@@ -15,7 +15,7 @@ public class ConcreteController implements Controller
     public boolean playAgain = false;
     public boolean waitingForInput = false;
 
-    public ConcreteController(Board board)
+    public ControllerImpl(Board board)
     {
         this.board = board;
     }
@@ -25,7 +25,7 @@ public class ConcreteController implements Controller
         return board.charAt(spot);
     }
 
-    public void setGUI(View view)
+    public void setUI(View view)
     {
         this.view = view;
     }
@@ -143,6 +143,26 @@ public class ConcreteController implements Controller
     {
         waitingForInput = false;
         playAgain = b;
+    }
+
+    public void setWaitingForInput(boolean b)
+    {
+        waitingForInput = b;
+    }
+
+    public void setPlayAgain(boolean b)
+    {
+        playAgain = b;
+    }
+
+    public void setGameType(int gameType)
+    {
+        this.gameType = gameType;
+    }
+
+    public void setLastMove(int move)
+    {
+        lastMove = move;
     }
 
     public void gameTypeChosen(int gameType)

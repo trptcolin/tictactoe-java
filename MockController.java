@@ -73,7 +73,7 @@ public class MockController implements Controller
         return false;
     }
 
-    public void setGUI(View view)
+    public void setUI(View view)
     {
     }
 
@@ -93,5 +93,21 @@ public class MockController implements Controller
     {
         playAgainCalled = true;
         playAgainCalledWith = b;
+    }
+
+    public void setWaitingForInput(boolean b)
+    {
+    }
+
+    public void setPlayAgain(boolean b)
+    {
+    }
+
+    public void setGameType(int i)
+    {
+    }
+
+    public void setLastMove(int move)
+    {
     }
 }
