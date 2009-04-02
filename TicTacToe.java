@@ -9,22 +9,23 @@ public class TicTacToe
 {
     public static void main(String[] args)
     {
-        Board board = new Board();
-        Controller gameController = new ControllerImpl(board);
-        gameController.setUI(new ConsoleView(gameController));
-        
-        Player player1, player2;
-
-        int gameType;
         Game game;
 
-        boolean playAgain = true;
+        PlayerFactory playerFactory = new PlayerFactoryImpl();
+        Player player1, player2;
 
+        Board board = new Board();
+        Controller gameController = new ControllerImpl(board);
+        gameController.setUI(new ConsoleView(gameController, playerFactory, board));
+
+        boolean playAgain = true;
+        int gameType;
+                   
         while(playAgain)
         {
             gameType = gameController.requestGameType();
-            player1 = PlayerFactory.createPlayer(board, 'X', gameController, gameType);
-            player2 = PlayerFactory.createPlayer(board, 'O', gameController, gameType);
+            player1 = playerFactory.createPlayer(board, 'X', gameController, gameType);
+            player2 = playerFactory.createPlayer(board, 'O', gameController, gameType);
 
             game = new Game(board, gameController, player1, player2);
             

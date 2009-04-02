@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.lang.reflect.Field;
 
 /**
  * Created by IntelliJ IDEA.
@@ -12,12 +13,22 @@ import java.awt.event.*;
 public class SwingView implements View
 {
     protected Controller controller;
+    protected PlayerFactory playerFactory;
     protected JFrame jframe = new JFrame();
 
-    public SwingView(final Controller controller)
+    public SwingView()
+    {
+    }
+    
+    public SwingView(final Controller controller, PlayerFactory playerFactory)
     {
         this.controller = controller;
+        this.playerFactory = playerFactory;
+        setupWindow();
+    }
 
+    protected void setupWindow()
+    {
         int windowWidth = 500;
         int windowHeight = 500;
 
@@ -25,7 +36,12 @@ public class SwingView implements View
         jframe.setSize(windowWidth, windowHeight);
         jframe.setBackground(Color.white);
 
-        jframe.setVisible(true);
+        setVisible(true);
+    }
+
+    private void setVisible(boolean visible)
+    {
+        jframe.setVisible(visible);
     }
 
     public void buildBoard()
@@ -38,7 +54,7 @@ public class SwingView implements View
             JLabel square = createLabel(i);
             jframe.add(square);
         }
-        jframe.setVisible(true);
+        setVisible(true);
     }
 
     private JLabel createLabel(int i)
@@ -57,21 +73,19 @@ public class SwingView implements View
     {
         JButton[] buttons = new JButton[4];
 
-        int i = 0;
 
         jframe.getContentPane().setLayout(new GridLayout(2, 2));
-        for(PlayerFactory.GameType gameType : PlayerFactory.GameType.values())
+
+        for(int i = 0; i < playerFactory.numberOfGameTypes; i++)
         {
-            // relies on naming convention _V_ between player types
-            String[] playerNames = gameType.toString().split("_V_");
-            buttons[i] = new JButton("" + playerNames[0] + " (X) vs. " + playerNames[1] + " (O)");
+            String gameTypeString = playerFactory.gameTypeToString(i);
+            buttons[i] = new JButton(gameTypeString);
 
             buttons[i].setName("" + (i - 1));
             buttons[i].addActionListener(new GameTypeButton(i));
             jframe.add(buttons[i]);
-            i++;
         }
-        jframe.setVisible(true);
+        setVisible(true);
     }
 
     public void addFinalMessage()

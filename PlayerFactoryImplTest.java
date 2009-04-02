@@ -9,23 +9,25 @@ import org.junit.Before;
  * Time: 1:22:59 PM
  * To change this template use File | Settings | File Templates.
  */
-public class PlayerFactoryTest extends Assert
+public class PlayerFactoryImplTest extends Assert
 {
     private Board board;
     private Controller controller;
+    private PlayerFactory playerFactory;
 
     @Before
     public void setup()
     {
         board = new Board();
         controller = new MockController(board);
+        playerFactory = new PlayerFactoryImpl();
     }
 
     @Test
     public void shouldCreatePlayersForComputerVComputer() throws Exception
     {
-        Player playerX = PlayerFactory.createPlayer(board, 'X', controller, 1);
-        Player playerO = PlayerFactory.createPlayer(board, 'O', controller, 1);
+        Player playerX = playerFactory.createPlayer(board, 'X', controller, 1);
+        Player playerO = playerFactory.createPlayer(board, 'O', controller, 1);
 
         assertTrue(playerX instanceof ComputerPlayer);
         assertTrue(playerO instanceof ComputerPlayer);
@@ -34,8 +36,8 @@ public class PlayerFactoryTest extends Assert
     @Test
     public void shouldCreatePlayersForComputerVHuman() throws Exception
     {
-        Player playerX = PlayerFactory.createPlayer(board, 'X', controller, 2);
-        Player playerO = PlayerFactory.createPlayer(board, 'O', controller, 2);
+        Player playerX = playerFactory.createPlayer(board, 'X', controller, 2);
+        Player playerO = playerFactory.createPlayer(board, 'O', controller, 2);
 
         assertTrue(playerX instanceof ComputerPlayer);
         assertTrue(playerO instanceof HumanPlayer);
@@ -44,8 +46,8 @@ public class PlayerFactoryTest extends Assert
     @Test
     public void shouldCreatePlayersForHumanVComputer() throws Exception
     {
-        Player playerX = PlayerFactory.createPlayer(board, 'X', controller, 3);
-        Player playerO = PlayerFactory.createPlayer(board, 'O', controller, 3);
+        Player playerX = playerFactory.createPlayer(board, 'X', controller, 3);
+        Player playerO = playerFactory.createPlayer(board, 'O', controller, 3);
 
         assertTrue(playerX instanceof HumanPlayer);
         assertTrue(playerO instanceof ComputerPlayer);
@@ -54,8 +56,8 @@ public class PlayerFactoryTest extends Assert
     @Test
     public void shouldCreatePlayersForHumanVHuman() throws Exception
     {
-        Player playerX = PlayerFactory.createPlayer(board, 'X', controller, 4);
-        Player playerO = PlayerFactory.createPlayer(board, 'O', controller, 4);
+        Player playerX = playerFactory.createPlayer(board, 'X', controller, 4);
+        Player playerO = playerFactory.createPlayer(board, 'O', controller, 4);
 
         assertTrue(playerX instanceof HumanPlayer);
         assertTrue(playerO instanceof HumanPlayer);

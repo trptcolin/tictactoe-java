@@ -23,7 +23,7 @@ public class SwingViewTest extends Assert
     public void setup()
     {
         controller = new MockController(new Board());
-        swingView = new SwingView(controller);
+        swingView = new SwingView(controller, new PlayerFactoryImpl());
     }
 
     @Test

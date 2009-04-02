@@ -1,56 +1,13 @@
 /**
  * Created by IntelliJ IDEA.
  * User: 8thlight
- * Date: Mar 26, 2009
- * Time: 1:09:58 PM
- * To change this template use File | Settings | File Templates.
+ * Date: Apr 2, 2009
+ * Time: 9:29:15 AM
  */
-public class PlayerFactory
+public interface PlayerFactory
 {
-    // Naming convention _V_ determines choices
-    public enum GameType
-    {
-        Computer_V_Computer,
-        Computer_V_Human,
-        Human_V_Computer,
-        Human_V_Human
-    }
+    static int numberOfGameTypes = 4;   
+    Player createPlayer(Board board, char mark, Controller controller, int gameTypeCode);
 
-    public static Player createPlayer(Board board, char mark, Controller controller, int gameTypeCode)
-    {
-        Player player;
-        GameType gameType = GameType.Computer_V_Computer;
-
-        gameTypeCode -= 1;
-
-        for(GameType gt : GameType.values())
-            if(gt.ordinal() == gameTypeCode)
-                gameType = gt;
-
-        switch(gameType)
-        {
-            case Computer_V_Computer:
-                player = new ComputerPlayer(board, mark);
-                break;
-            case Computer_V_Human:
-                if(mark == 'X')
-                    player = new ComputerPlayer(board, mark);
-                else
-                    player = new HumanPlayer(board, mark, controller);
-                break;
-            case Human_V_Computer:
-                if(mark == 'X')
-                    player = new HumanPlayer(board, mark, controller);
-                else
-                    player = new ComputerPlayer(board, mark);
-                break;
-            case Human_V_Human:
-                player = new HumanPlayer(board, mark, controller);
-                break;
-            default:
-                player = new ComputerPlayer(board, mark);
-        }
-
-        return player;
-    }
+    String gameTypeToString(int i);
 }

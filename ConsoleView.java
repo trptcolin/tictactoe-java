@@ -11,11 +11,13 @@ public class ConsoleView implements View
 {
     private Controller controller;
     private Board board;
+    private PlayerFactory playerFactory;
 
-    public ConsoleView(Controller controller, Board board)
+    public ConsoleView(Controller controller, PlayerFactory playerFactory, Board board)
     {
         this.controller = controller;
         this.board = board;
+        this.playerFactory = playerFactory;
     }
 
     public void clear()
@@ -57,12 +59,10 @@ public class ConsoleView implements View
     {
         String choices = "";
 
-        for(PlayerFactory.GameType gameType : PlayerFactory.GameType.values())
+        for(int i = 0; i < playerFactory.numberOfGameTypes; i++)
         {
-            // relies on naming convention _V_ between player types
-            String[] playerNames = gameType.toString().split("_V_");
-            choices += "\t" + (gameType.ordinal() + 1) +" - " + playerNames[0] + " (X) vs. " +
-                    playerNames[1] + " (O)\n";
+            String gameTypeString = playerFactory.gameTypeToString(i);
+            choices += "\t" + (i + 1) + " - " + gameTypeString + "\n";
         }
 
         System.out.println( "What kind of game would you like to play?\n" +
@@ -78,7 +78,37 @@ public class ConsoleView implements View
         getUserInput();
     }
 
-    public void getUserInput(final boolean playAgain)
+    private void getUserPlayAgain()
+    {
+        Thread thread = new Thread() {
+            public void run()
+            {
+                BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+                int move = -1;
+                while(move == -1)
+                {
+                    try
+                    {
+                        if(br.readLine() != null)
+                        {
+                            move = 0;
+                            controller.setWaitingForInput(false);
+                            controller.setPlayAgain(true);
+                            return;
+                        }
+                    }
+                    catch(Exception e)
+                    {
+                        e.printStackTrace();
+                    }
+
+                }
+            }
+        };
+
+        thread.start();
+    }
+    private void getUserInput()
     {
         Thread thread = new Thread() {
             public void run()
@@ -88,55 +118,30 @@ public class ConsoleView implements View
                 int move = -1;
                 while(move == -1)
                 {
-                    if(playAgain)
+                    try
                     {
-                        try
+                        moveInput = br.readLine();
+                        move = Integer.parseInt(moveInput);
+                        if(!board.isOccupied(move - 1))
                         {
-                            if(br.readLine() != null)
-                            {
-                                move = 0;
-                                controller.setWaitingForInput(false);
-                                controller.setPlayAgain(true);
-                                return;
-                            }
+                            controller.setWaitingForInput(false);
+                            controller.setGameType(move);
+                            controller.setLastMove(move - 1);
                         }
-                        catch(Exception e)
-                        {
-                            e.printStackTrace();
-                        }
-                    }
-                    else
-                    {
-                        try
-                        {
-                            moveInput = br.readLine();
-                            move = Integer.parseInt(moveInput);
-                            if(!board.isOccupied(move - 1))
-                            {
-                                controller.setWaitingForInput(false);
-                                controller.setGameType(move);
-                                controller.setLastMove(move - 1);
-                            }
-                            else
-                            {
-                                System.out.print("Invalid input! Try again: ");
-                                move = -1;
-                            }
-                        }
-                        catch(Exception e)
+                        else
                         {
                             System.out.print("Invalid input! Try again: ");
+                            move = -1;
                         }
+                    }
+                    catch(Exception e)
+                    {
+                        System.out.print("Invalid input! Try again: ");
                     }
                 }
             }
         };
-
         thread.start();
-    }
-    public void getUserInput()
-    {
-        getUserInput(false);
     }
 
     public void addFinalMessage()
@@ -150,7 +155,7 @@ public class ConsoleView implements View
         endMessage += "\nFinal board position below\n===\n";
 
         System.out.println(endMessage);
-        getUserInput(true);
+        getUserPlayAgain();
     }
 
     public void stopListening()
