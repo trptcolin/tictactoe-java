@@ -1,3 +1,5 @@
+package trptcolin.main;
+
 /**
  * Created by IntelliJ IDEA.
  * User: 8thlight

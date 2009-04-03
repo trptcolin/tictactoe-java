@@ -1,11 +1,15 @@
+package trptcolin.main;
+
 import junit.framework.Assert;
-import org.junit.Test;
 import org.junit.Before;
+import org.junit.Test;
+import trptcolin.players.MockPlayer;
+import trptcolin.ui.MockController;
 
 import java.io.ByteArrayInputStream;
-import java.io.PrintStream;
-import java.io.InputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+import java.io.PrintStream;
 
 /**
  * Created by IntelliJ IDEA.

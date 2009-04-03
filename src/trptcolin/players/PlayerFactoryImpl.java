@@ -1,3 +1,8 @@
+package trptcolin.players;
+
+import trptcolin.main.Board;
+import trptcolin.ui.Controller;
+
 /**
  * Created by IntelliJ IDEA.
  * User: 8thlight
@@ -65,7 +70,7 @@ public class PlayerFactoryImpl implements PlayerFactory
                 gameTypeString = "Human (X) vs. Human (O)";
                 break;
             default:
-                gameTypeString = "Unknown Game Type";
+                gameTypeString = "Unknown main.Game Type";
         }
         return gameTypeString;
     }

@@ -1,3 +1,8 @@
+package trptcolin.players;
+
+import trptcolin.main.Board;
+import trptcolin.ui.Controller;
+
 /**
  * Created by IntelliJ IDEA.
  * User: 8thlight

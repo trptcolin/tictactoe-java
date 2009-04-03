@@ -1,3 +1,8 @@
+package trptcolin.ui;
+
+import trptcolin.main.Board;
+import trptcolin.players.PlayerFactory;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
@@ -73,7 +78,7 @@ public class ConsoleView implements View
 
     public void getUserMove(char mark)
     {
-        System.out.print("Player " + mark + ", make your move (1-9): ");
+        System.out.print("main.Player " + mark + ", make your move (1-9): ");
 
         getUserInput();
     }
@@ -148,7 +153,7 @@ public class ConsoleView implements View
     {
         String endMessage = "";
         if(board.isWon())
-            endMessage += "Player " + board.getWinner() + " was the winner!";
+            endMessage += "main.Player " + board.getWinner() + " was the winner!";
         else
             endMessage +="It was a tie!";
 

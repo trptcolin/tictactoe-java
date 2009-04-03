@@ -2,8 +2,8 @@ This is my second attempt at a Tic-Tac-Toe game, in Java this time.
 
 The computer player's AI uses the minimax algorithm.
 
-The view can also be easily switched out between a console version and a Swing GUI version (just exchange ConsoleView
-and SwingView in src/TicTacToe.java).
+The view can also be easily switched out between a console version and a Swing GUI version (just exchange views.ConsoleView
+and views.SwingView in src/main.TicTacToe.java).
 
 If you just want to play the game, run:
 

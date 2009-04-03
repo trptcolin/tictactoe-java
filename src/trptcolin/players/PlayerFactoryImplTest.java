@@ -1,6 +1,11 @@
+package trptcolin.players;
+
 import junit.framework.Assert;
-import org.junit.Test;
 import org.junit.Before;
+import org.junit.Test;
+import trptcolin.main.Board;
+import trptcolin.ui.Controller;
+import trptcolin.ui.MockController;
 
 /**
  * Created by IntelliJ IDEA.

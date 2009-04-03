@@ -1,3 +1,5 @@
+package trptcolin.ui;
+
 /**
  * Created by IntelliJ IDEA.
  * User: 8thlight

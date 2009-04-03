@@ -1,3 +1,7 @@
+package trptcolin.ui;
+
+import trptcolin.main.Board;
+
 /**
  * Created by IntelliJ IDEA.
  * User: 8thlight

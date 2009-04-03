@@ -1,6 +1,10 @@
+package trptcolin.players;
+
 import junit.framework.Assert;
-import org.junit.Test;
 import org.junit.Before;
+import org.junit.Test;
+import trptcolin.main.MockBoard;
+import trptcolin.ui.MockController;
 
 /**
  * Created by IntelliJ IDEA.
@@ -35,10 +39,10 @@ public class HumanPlayerTest extends Assert
     public void shouldGetMoveFromGameDisplayAndPopulateBoard() throws Exception
     {
         humanPlayer.makeMove();
-        assertEquals(true, controller.requestUserMoveCalled);
+        Assert.assertEquals(true, controller.requestUserMoveCalled);
 
-        assertEquals(true, board.populateCalled);
-        assertEquals(mark, board.populatedMark);
-        assertEquals(controller.userPositionGiven, board.populatedPosition);
+        Assert.assertEquals(true, board.populateCalled);
+        Assert.assertEquals(mark, board.populatedMark);
+        Assert.assertEquals(controller.userPositionGiven, board.populatedPosition);
     }
 }

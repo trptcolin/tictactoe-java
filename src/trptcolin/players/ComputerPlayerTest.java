@@ -1,6 +1,9 @@
+package trptcolin.players;
+
 import junit.framework.Assert;
-import org.junit.Test;
 import org.junit.Before;
+import org.junit.Test;
+import trptcolin.main.Board;
 
 /**
  * Created by IntelliJ IDEA.
@@ -37,7 +40,7 @@ public class ComputerPlayerTest extends Assert
 
         computerPlayer.makeMove();
         
-        assertEquals('X', board.charAt(2));
+        Assert.assertEquals('X', board.charAt(2));
     }
 
     @Test
@@ -50,7 +53,7 @@ public class ComputerPlayerTest extends Assert
 
         computerPlayer.makeMove();
 
-        assertEquals('X', board.charAt(6));
+        Assert.assertEquals('X', board.charAt(6));
     }
 
     @Test
@@ -63,7 +66,7 @@ public class ComputerPlayerTest extends Assert
         
         computerPlayer.makeMove();
 
-        assertEquals('X', board.charAt(8));
+        Assert.assertEquals('X', board.charAt(8));
     }
 
     @Test
@@ -88,7 +91,7 @@ public class ComputerPlayerTest extends Assert
                                       
         otherPlayer.makeMove();
 
-        assertEquals('O', board.charAt(7));
+        Assert.assertEquals('O', board.charAt(7));
     }
 
     @Test
@@ -100,7 +103,7 @@ public class ComputerPlayerTest extends Assert
 
         otherPlayer.makeMove();
 
-        assertEquals('O', board.charAt(6));
+        Assert.assertEquals('O', board.charAt(6));
     }
 
     @Test

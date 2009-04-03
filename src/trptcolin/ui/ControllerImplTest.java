@@ -1,6 +1,10 @@
+package trptcolin.ui;
+
 import junit.framework.Assert;
-import org.junit.Test;
 import org.junit.Before;
+import org.junit.Test;
+import trptcolin.main.Board;
+import trptcolin.main.MockBoard;
 
 /**
  * Created by IntelliJ IDEA.

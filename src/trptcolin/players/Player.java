@@ -1,5 +1,9 @@
-import java.util.List;
+package trptcolin.players;
+
+import trptcolin.main.Board;
+
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
@@ -11,7 +15,7 @@ import java.util.ArrayList;
 public abstract class Player
 {
     protected Board board;
-    protected char mark;
+    public char mark;
     protected Player otherPlayer;
 
     public Player(Board board, char mark)

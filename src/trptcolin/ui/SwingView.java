@@ -1,3 +1,7 @@
+package trptcolin.ui;
+
+import trptcolin.players.PlayerFactory;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;

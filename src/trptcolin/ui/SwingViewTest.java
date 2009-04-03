@@ -1,13 +1,17 @@
-import org.junit.Test;
-import org.junit.Before;
+package trptcolin.ui;
+
 import junit.framework.Assert;
+import org.junit.Before;
+import org.junit.Test;
+import trptcolin.main.Board;
+import trptcolin.players.PlayerFactoryImpl;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 /**
  * Created by IntelliJ IDEA.

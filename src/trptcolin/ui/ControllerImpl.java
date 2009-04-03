@@ -1,3 +1,7 @@
+package trptcolin.ui;
+
+import trptcolin.main.Board;
+
 /**
  * Created by IntelliJ IDEA.
  * User: 8thlight
@@ -7,7 +11,7 @@
  */
 public class ControllerImpl implements Controller
 {
-    protected Board board;
+    public Board board;
     protected View view;
     
     public int lastMove = -1;
