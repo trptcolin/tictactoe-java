@@ -1,0 +1,20 @@
+<project name="TicTacToe" basedir="." default="main">
+
+    <property name="src.dir" value="src" />
+    <property name="build.dir" value="out" />
+
+    <target name="clean">
+        <delete dir="${build.dir}"></delete>
+    </target>
+
+    <target name="compile">
+        <mkdir dir="${build.dir}" />
+        <javac srcdir="${src.dir}" destdir="${build.dir}" />
+    </target>
+
+    <target name="run" depends="compile">
+        <java />
+    </target>
+    
+    <target name="main" depends="clean,run" />
+</project>
