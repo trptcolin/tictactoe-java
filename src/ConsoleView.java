@@ -30,7 +30,7 @@ public class ConsoleView implements View
         System.out.println(boardToString());
         if(board.gameOver())
         {
-            System.out.println("Press any key to play again.");
+            System.out.println("Press any key to play again (Ctrl-C to quit)");
         }
     }
 

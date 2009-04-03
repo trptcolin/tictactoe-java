@@ -16,7 +16,7 @@ public class TicTacToe
 
         Board board = new Board();
         Controller gameController = new ControllerImpl(board);
-        gameController.setUI(new ConsoleView(gameController, playerFactory, board));
+        gameController.setUI(new SwingView(gameController, playerFactory));
 
         boolean playAgain = true;
         int gameType;

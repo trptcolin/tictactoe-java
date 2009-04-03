@@ -1,7 +1,8 @@
-<project name="TicTacToe" basedir="." default="main">
+<project name="TicTacToe" basedir="." default="test">
 
     <property name="src.dir" value="src" />
     <property name="build.dir" value="out" />
+    <property name="lib.dir" value="lib" />
 
     <target name="clean">
         <delete dir="${build.dir}"></delete>
@@ -12,9 +13,32 @@
         <javac srcdir="${src.dir}" destdir="${build.dir}" />
     </target>
 
-    <target name="run" depends="compile">
-        <java />
+    <path id="test.classpath">
+      <pathelement location="${build.dir}" />
+      <fileset dir="${lib.dir}">
+        <include name="**/*.jar"/>
+      </fileset>
+    </path>
+
+    <target name="compile-test">
+        <mkdir dir="${build.dir}" />
+        <javac srcdir="${src.dir}" destdir="${build.dir}" debug="true" />
     </target>
-    
-    <target name="main" depends="clean,run" />
+
+    <target name="test" depends="clean,compile-test">
+        <junit fork="yes" haltonfailure="yes" failureproperty="test.failure">
+            <formatter type="plain" usefile="false" />
+            <classpath refid="test.classpath" />
+            <batchtest>
+                <fileset dir="${build.dir}" includes="*Test.class" />
+            </batchtest>
+        </junit>
+    </target>
+
+    <target name="run" depends="compile">
+        <java classname="TicTacToe" classpath="${build.dir}" fork="yes" />
+    </target>
+
+
+    <target name="main" depends="clean,test,run" />
 </project>

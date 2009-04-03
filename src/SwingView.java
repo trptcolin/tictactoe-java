@@ -100,6 +100,15 @@ public class SwingView implements View
         playAgain.setName("playAgain");
         jframe.add(playAgain);
 
+        JButton quit = new JButton("Quit");
+        quit.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e)
+            {
+                System.exit(0);
+            }
+        });
+        jframe.add(quit);
+
         jframe.setSize(500, 600);
     }
 

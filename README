@@ -2,6 +2,14 @@ This is my second attempt at a Tic-Tac-Toe game, in Java this time.
 
 The computer player's AI uses the minimax algorithm.
 
-src/TicTacToe.java is the main source file.
+The view can also be easily switched out between a console version and a Swing GUI version (just exchange ConsoleView
+and SwingView in src/TicTacToe.java).
 
-The view can be easily switched out between a console version and a Swing GUI version.
+To play the game, run
+
+ant
+
+in the root directory to build the Java binaries and run the test suite; then
+
+cd out && java TicTacToe
+
