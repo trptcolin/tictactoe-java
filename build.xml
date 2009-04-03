@@ -22,12 +22,12 @@
 
     <target name="compile-test">
         <mkdir dir="${build.dir}" />
-        <javac srcdir="${src.dir}" destdir="${build.dir}" debug="true" />
+        <javac srcdir="${src.dir}" destdir="${build.dir}" debug="yes" />
     </target>
 
     <target name="test" depends="clean,compile-test">
         <junit fork="yes" haltonfailure="yes" failureproperty="test.failure">
-            <formatter type="plain" usefile="false" />
+            <formatter type="brief" usefile="false" />
             <classpath refid="test.classpath" />
             <batchtest>
                 <fileset dir="${build.dir}" includes="*Test.class" />
@@ -35,7 +35,7 @@
         </junit>
     </target>
 
-    <target name="run" depends="compile">
+    <target name="run" depends="clean,compile">
         <java classname="TicTacToe" classpath="${build.dir}" fork="yes" />
     </target>
 

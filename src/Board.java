@@ -140,7 +140,7 @@ public class Board
 
     public List<Integer> openSpaces()
     {
-        List openSpaces = new ArrayList();
+        List<Integer> openSpaces = new ArrayList<Integer>();
         for(int i = 0; i < 9; i++)
         {
             if(squares[i] == 0)

@@ -12,4 +12,3 @@ ant
 in the root directory to build the Java binaries and run the test suite; then
 
 cd out && java TicTacToe
-
