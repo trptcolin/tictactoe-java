@@ -10,19 +10,27 @@
 
     <target name="compile">
         <mkdir dir="${build.dir}" />
-        <javac srcdir="${src.dir}" destdir="${build.dir}" />
+        <javac srcdir="${src.dir}" destdir="${build.dir}">
+            <include name="**/*.java"/>
+        </javac>        
     </target>
 
+    <path id="classpath">
+        <pathelement location="${build.dir}" />
+    </path>
+
     <path id="test.classpath">
-      <pathelement location="${build.dir}" />
-      <fileset dir="${lib.dir}">
-        <include name="**/*.jar"/>
-      </fileset>
+        <pathelement location="${build.dir}" />
+        <fileset dir="${lib.dir}">
+            <include name="**/*.jar" />
+        </fileset>
     </path>
 
     <target name="compile-test">
         <mkdir dir="${build.dir}" />
-        <javac srcdir="${src.dir}" destdir="${build.dir}" debug="yes" />
+        <javac srcdir="${src.dir}" destdir="${build.dir}" debug="yes">
+            <include name="**/**/*.java" />
+        </javac>
     </target>
 
     <target name="test" depends="clean,compile-test">
@@ -30,15 +38,16 @@
             <formatter type="brief" usefile="false" />
             <classpath refid="test.classpath" />
             <batchtest>
-                <fileset dir="${build.dir}" includes="*Test.class" />
+                <fileset dir="${build.dir}" includes="**/*Test.class" />
             </batchtest>
         </junit>
     </target>
 
     <target name="run" depends="clean,compile">
-        <java classname="TicTacToe" classpath="${build.dir}" fork="yes" />
+        <java classname="trptcolin.main.TicTacToe" fork="yes">
+            <classpath refid="classpath" />
+        </java>
     </target>
-
 
     <target name="main" depends="clean,test,run" />
 </project>
