@@ -1,4 +1,4 @@
-package trptcolin.ui;
+package trptcolin.main;
 
 /**
  * Created by IntelliJ IDEA.

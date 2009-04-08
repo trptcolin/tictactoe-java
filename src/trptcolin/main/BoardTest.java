@@ -5,7 +5,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import trptcolin.players.MockPlayer;
-import trptcolin.players.Player;
 
 /**
  * Created by IntelliJ IDEA.

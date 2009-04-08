@@ -1,6 +1,4 @@
-package trptcolin.players;
-
-import trptcolin.main.Board;
+package trptcolin.main;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +12,7 @@ import java.util.List;
  */
 public abstract class Player
 {
-    protected Board board;
+    public Board board;
     public char mark;
     protected Player otherPlayer;
 

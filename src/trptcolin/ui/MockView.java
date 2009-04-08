@@ -1,5 +1,7 @@
 package trptcolin.ui;
 
+import trptcolin.main.View;
+
 /**
  * Created by IntelliJ IDEA.
  * User: 8thlight

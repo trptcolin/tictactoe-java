@@ -1,7 +1,9 @@
 package trptcolin.ui;
 
 import trptcolin.main.Board;
-import trptcolin.players.PlayerFactory;
+import trptcolin.main.Controller;
+import trptcolin.main.PlayerFactory;
+import trptcolin.main.View;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;

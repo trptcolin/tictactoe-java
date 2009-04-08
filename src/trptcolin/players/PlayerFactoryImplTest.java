@@ -4,7 +4,9 @@ import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import trptcolin.main.Board;
-import trptcolin.ui.Controller;
+import trptcolin.main.Controller;
+import trptcolin.main.Player;
+import trptcolin.main.PlayerFactory;
 import trptcolin.ui.MockController;
 
 /**

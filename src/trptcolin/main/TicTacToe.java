@@ -1,9 +1,6 @@
 package trptcolin.main;
 
 import trptcolin.players.PlayerFactoryImpl;
-import trptcolin.players.Player;
-import trptcolin.players.PlayerFactory;
-import trptcolin.ui.Controller;
 import trptcolin.ui.ControllerImpl;
 import trptcolin.ui.SwingView;
 

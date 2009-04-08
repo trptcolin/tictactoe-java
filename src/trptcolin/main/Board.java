@@ -1,7 +1,5 @@
 package trptcolin.main;
 
-import trptcolin.players.Player;
-
 import java.util.List;
 import java.util.ArrayList;
 

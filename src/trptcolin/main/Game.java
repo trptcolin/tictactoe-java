@@ -1,8 +1,5 @@
 package trptcolin.main;
 
-import trptcolin.players.Player;
-import trptcolin.ui.Controller;
-
 /**
  * Created by IntelliJ IDEA.
  * User: 8thlight

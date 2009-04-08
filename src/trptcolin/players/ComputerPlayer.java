@@ -1,6 +1,7 @@
 package trptcolin.players;
 
 import trptcolin.main.Board;
+import trptcolin.main.Player;
 
 import java.util.List;
 
