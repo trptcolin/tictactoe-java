@@ -6,28 +6,17 @@ import java.util.ArrayList;
 /**
  * Created by IntelliJ IDEA.
  * User: 8thlight
- * Date: Mar 23, 2009
- * Time: 9:47:06 AM
- * To change this template use File | Settings | File Templates.
+ * Date: Apr 8, 2009
+ * Time: 11:10:30 AM
  */
-public class Board
+public abstract class Board
 {
-    private char[] squares = new char[9];
-    protected char winner = 0;
-    private final int[][] winSets = new int[][]{
-            {0, 1, 2},
-            {3, 4, 5},
-            {6, 7, 8},
-            {0, 3, 6},
-            {1, 4, 7},
-            {2, 5, 8},
-            {0, 4, 8},
-            {2, 4, 6} };
+    protected char[] squares;
 
+    public char winner;
+    public boolean won;
 
-    public Board()
-    {
-    }
+    public static int[][] winSets;
 
     public char getWinner()
     {
@@ -42,19 +31,19 @@ public class Board
         return player.mark == getWinner();
     }
 
-    private int flattenRowCol(int row, int col)
-    {
-        return (3 * row) + col;
-    }
 
     public boolean isOccupied(int position)
     {
-        return squares[position] != 0;
+        return charAt(position) != 0;
     }
+//                              
+//    public abstract int numberOfSquares();
+//    public abstract char charAt(int position);
+//    public abstract void populate(char mark, int position) throws Exception;
 
-    public boolean isOccupied(int row, int col)
+    public int numberOfSquares()
     {
-        return isOccupied(flattenRowCol(row, col));
+        return squares.length;
     }
 
     public char charAt(int position)
@@ -69,12 +58,19 @@ public class Board
             throw new Exception();
         }
         squares[position] = mark;
+        
+//        if(isWon(position))
+//        {
+//            won = true;
+//            winner = mark;
+//        }
+//        else
+//        {
+//            won = false;
+//            winner = 0;
+//        }
     }
 
-    public void populate(char mark, int row, int col) throws Exception
-    {
-        populate(mark, flattenRowCol(row, col));
-    }
 
     public boolean gameOver()
     {
@@ -89,33 +85,37 @@ public class Board
         return true;
     }
 
+    private boolean isWon(int position)
+    {
+        char c;
+        
+        for(int[] winSet : winSets)
+        {
+            if(position == winSet[0] || position == winSet[1] || position == winSet[2])
+            {
+                c = charAt(winSet[0]);
+                if(c != 0 && c == charAt(winSet[1]) && c == charAt(winSet[2]))
+                {
+                    winner = c;
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+
     public boolean isWon()
     {
-        int consecutiveMarks = 0;
-        char currentMark = 0;
-        char previousMark = 0;
-
+        char c;
+        
         for (int[] winSet : winSets)
         {
-            for (int position : winSet)
+            c = charAt(winSet[0]);
+            if(c != 0 && c == charAt(winSet[1]) && c == charAt(winSet[2]))
             {
-                previousMark = currentMark;
-                currentMark = squares[position];
-                if (currentMark == 0 || (consecutiveMarks > 0 && currentMark != previousMark))
-                {
-                    consecutiveMarks = 0;
-                    break;
-                }
-                else
-                {
-                    consecutiveMarks++;
-                    if (consecutiveMarks > 2)
-                    {
-                        winner = currentMark;
-                        return true;
-                    }
-                    continue;
-                }
+                winner = c;
+                return true;
             }
         }
         return false;
@@ -123,29 +123,21 @@ public class Board
 
     public boolean sameSquares(Board otherBoard)
     {
-        for(int i=0; i<9; i++)
-            if(otherBoard.squares[i] != this.squares[i])
+        for(int i = 0; i < numberOfSquares(); i++)
+            if(otherBoard.charAt(i) != this.squares[i])
                 return false;
-
 
         return true;
     }
 
-    public Board copy() throws Exception
-    {
-        Board newBoard = new Board();
-        for(int position = 0; position < 9; position++)
-            newBoard.populate(squares[position], position);
-        
-        return newBoard;
-    }
+    public abstract Board copy() throws Exception;
 
     public List<Integer> openSpaces()
     {
         List<Integer> openSpaces = new ArrayList<Integer>();
-        for(int i = 0; i < 9; i++)
+        for(int i = 0; i < numberOfSquares(); i++)
         {
-            if(squares[i] == 0)
+            if(charAt(i) == 0)
             {
                 openSpaces.add(i);
             }
@@ -156,13 +148,13 @@ public class Board
 
     public void clear() throws Exception
     {
-        for(int i = 0; i < 9; i++)
+        for(int i = 0; i < numberOfSquares(); i++)
             squares[i] = '\0';
     }
 
     public boolean empty()
     {
-        for(int i = 0; i < 9; i++)
+        for(int i = 0; i < numberOfSquares(); i++)
         {
             if(isOccupied(i))
                 return false;

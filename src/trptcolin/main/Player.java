@@ -43,7 +43,12 @@ public abstract class Player
     public List<Board> possibleResultingBoards(Board board) throws Exception
     {
         List<Board> resultingBoards = new ArrayList<Board>();
-
+//
+//        if(board.gameOver())
+//        {
+//            return resultingBoards;
+//        }
+        
         for(int possibleMove : board.openSpaces())
         {
             Board newBoard = board.copy();

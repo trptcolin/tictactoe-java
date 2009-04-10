@@ -1,8 +1,9 @@
 package trptcolin.main;
 
+import trptcolin.boards.BoardIn3D;
 import trptcolin.players.PlayerFactoryImpl;
+import trptcolin.ui.ConsoleViewIn3D;
 import trptcolin.ui.ControllerImpl;
-import trptcolin.ui.SwingView;
 
 /**
  * Created by IntelliJ IDEA.
@@ -20,9 +21,9 @@ public class TicTacToe
         PlayerFactory playerFactory = new PlayerFactoryImpl();
         Player player1, player2;
 
-        Board board = new Board();
+        Board board = new BoardIn3D();
         Controller gameController = new ControllerImpl(board);
-        gameController.setUI(new SwingView(gameController, playerFactory));
+        gameController.setUI(new ConsoleViewIn3D(gameController, playerFactory, board));
 
         boolean playAgain = true;
         int gameType;

@@ -4,6 +4,7 @@ import trptcolin.main.Board;
 import trptcolin.main.Controller;
 import trptcolin.main.PlayerFactory;
 import trptcolin.main.View;
+import trptcolin.players.ComputerPlayer;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -39,9 +40,11 @@ public class ConsoleView implements View
         {
             System.out.println("Press any key to play again (Ctrl-C to quit)");
         }
+
+System.out.println("ComputerPlayer.bestMoveTime = " + ComputerPlayer.bestMoveTime);
     }
 
-    private char charAt(int position)
+    protected char charAt(int position)
     {
         char mark = controller.charAt(position);
         if(mark == 0)
@@ -80,7 +83,7 @@ public class ConsoleView implements View
 
     public void getUserMove(char mark)
     {
-        System.out.print("main.Player " + mark + ", make your move (1-9): ");
+        System.out.print("Player " + mark + ", make your move (1-9): ");
 
         getUserInput();
     }
@@ -115,7 +118,7 @@ public class ConsoleView implements View
 
         thread.start();
     }
-    private void getUserInput()
+    protected void getUserInput()
     {
         Thread thread = new Thread() {
             public void run()
@@ -155,7 +158,7 @@ public class ConsoleView implements View
     {
         String endMessage = "";
         if(board.isWon())
-            endMessage += "main.Player " + board.getWinner() + " was the winner!";
+            endMessage += "Player " + board.getWinner() + " was the winner!";
         else
             endMessage +="It was a tie!";
 

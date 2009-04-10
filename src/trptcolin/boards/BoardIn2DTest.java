@@ -1,10 +1,11 @@
-package trptcolin.main;
+package trptcolin.boards;
 
 import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
-import trptcolin.players.MockPlayer;
+import trptcolin.main.Board;
+import trptcolin.main.MockPlayer;
+import trptcolin.main.Player;
 
 /**
  * Created by IntelliJ IDEA.
@@ -14,15 +15,15 @@ import trptcolin.players.MockPlayer;
  * To change this template use File | Settings | File Templates.
  */
 
-public class BoardTest extends Assert
+public class BoardIn2DTest extends Assert
 {
 
-    private Board board;
+    private BoardIn2D board;
 
     @Before
     public void setup()
     {
-        board = new Board();
+        board = new BoardIn2D();
     }
 
     @Test
@@ -153,6 +154,7 @@ public class BoardTest extends Assert
     @Test
     public void shouldCopyItself() throws Exception
     {
+        board.populate('X', 0);
         Board otherBoard;
         otherBoard = board.copy();
 

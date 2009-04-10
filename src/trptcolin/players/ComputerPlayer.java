@@ -14,7 +14,14 @@ import java.util.List;
  */
 public class ComputerPlayer extends Player
 {
+
+    public static long bestMoveTime = 0;
+
     private int infinity = 1000000;
+private long gameOverCallLength = 0;
+private long winnerCallLength = 0;
+private long tieCallLength = 0;
+private long buildingPossibleBoardsCallLength = 0;
 
     public ComputerPlayer(Board board, char mark)
     {
@@ -23,9 +30,8 @@ public class ComputerPlayer extends Player
 
     public void makeMove() throws Exception
     {
-        board.populate(mark, bestMove(8));
+        board.populate(mark, bestMove(4));
     }
-
 
     private int getMove(Board initialBoard, Board resultBoard)
     {
@@ -42,8 +48,12 @@ public class ComputerPlayer extends Player
     
     private int bestMove(int depth) throws Exception
     {
+long now = System.currentTimeMillis();
+
         //TODO MDM - Why not moves?
         List<Board> possibleResultingBoards = possibleResultingBoards(board);
+
+System.out.println("possibleResultingBoardsTime = " + (System.currentTimeMillis() - now));
 
         int bestScoreSoFar = -infinity;
         int currentScore;
@@ -52,8 +62,21 @@ public class ComputerPlayer extends Player
 
         for(Board resultBoard : possibleResultingBoards)
         {
-            currentScore = minimax(resultBoard, depth, this);
+
+long minimaxStart = System.currentTimeMillis();
+gameOverCallLength = 0;
+winnerCallLength = 0;            
+buildingPossibleBoardsCallLength = 0;
             
+            currentScore = minimax(resultBoard, depth, this);
+
+long minimaxDuration = System.currentTimeMillis() - minimaxStart;
+System.out.println("minimaxDuration = " + minimaxDuration);
+System.out.println("gameOverCallLength = " + gameOverCallLength);
+System.out.println("tieCallLength = " + gameOverCallLength);
+
+System.out.println("winnerCallLength = " + winnerCallLength);
+System.out.println("buildingPossibleBoardsCallLength = " + buildingPossibleBoardsCallLength);
             move = getMove(board, resultBoard);
 
             if(currentScore > bestScoreSoFar)
@@ -63,17 +86,34 @@ public class ComputerPlayer extends Player
             }
         }
 
+bestMoveTime = System.currentTimeMillis() - now;        
+
         return bestMoveSoFar;
     }
 
 
     private int minimax(Board board, int depth, Player player) throws Exception
     {
-        if(board.gameOver() || depth == 0)
+
+long beforeGameOver = System.currentTimeMillis();
+
+        boolean gameOver = board.gameOver();
+
+gameOverCallLength += (System.currentTimeMillis() - beforeGameOver);
+
+long beforeBoardIsWinner = System.currentTimeMillis();
+        boolean isWinner = gameOver && (player.mark == board.winner);
+winnerCallLength += (System.currentTimeMillis() - beforeBoardIsWinner);
+
+long beforeTie = System.currentTimeMillis();
+        boolean isTie = gameOver && board.isTie();
+tieCallLength += (System.currentTimeMillis() - beforeTie);
+
+        if(gameOver || depth == 0)
         {
-            if(board.isWinner(player))
+            if(isWinner)
                 return infinity;
-            else if(board.isTie())
+            else if(isTie)
                 return 0;
             else
                 return -infinity;
@@ -85,8 +125,13 @@ public class ComputerPlayer extends Player
 
             int otherPlayerScore;
             int maxOtherPlayerScore = -infinity - 1;
-            
-            for(Board child : otherPlayer.possibleResultingBoards(board))
+
+long beforeBuildingPossibleBoards = System.currentTimeMillis();
+            List<Board> possibleBoards = otherPlayer.possibleResultingBoards(board);
+buildingPossibleBoardsCallLength += (System.currentTimeMillis() - beforeBuildingPossibleBoards);
+
+
+            for(Board child : possibleBoards)
             {
                 otherPlayerScore = minimax(child, depth - 1, otherPlayer);
                 maxOtherPlayerScore = Math.max(otherPlayerScore, maxOtherPlayerScore);

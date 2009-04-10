@@ -1,10 +1,9 @@
-package trptcolin.players;
+package trptcolin.main;
 
 import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import trptcolin.main.Board;
-import trptcolin.main.Player;
+import trptcolin.boards.BoardIn2D;
 
 /**
  * Created by IntelliJ IDEA.
@@ -15,7 +14,7 @@ import trptcolin.main.Player;
  */
 public class PlayerTest extends Assert
 {
-    private Board board = new Board();
+    private Board board = new BoardIn2D();
     private Player player;
 
     @Before

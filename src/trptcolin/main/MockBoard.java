@@ -1,5 +1,7 @@
 package trptcolin.main;
 
+import trptcolin.boards.BoardIn2D;
+
 /**
  * Created by IntelliJ IDEA.
  * User: 8thlight
@@ -7,7 +9,7 @@ package trptcolin.main;
  * Time: 11:22:28 AM
  * To change this template use File | Settings | File Templates.
  */
-public class MockBoard extends Board
+public class MockBoard extends BoardIn2D
 {
     public boolean populateCalled = false;
     public char populatedMark = 0;
@@ -15,6 +17,23 @@ public class MockBoard extends Board
 
     public boolean gameOverCalled = false;
 
+    public MockBoard()
+    {
+        squares = new char[9];
+        winner = 0;
+        if(winSets == null)
+        {
+            winSets = new int[][]{
+                {0, 1, 2},
+                {3, 4, 5},
+                {6, 7, 8},
+                {0, 3, 6},
+                {1, 4, 7},
+                {2, 5, 8},
+                {0, 4, 8},
+                {2, 4, 6} };
+        }
+    }
     public void populate(char mark, int position) throws Exception
     {
         populateCalled = true;

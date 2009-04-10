@@ -3,7 +3,7 @@ package trptcolin.ui;
 import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import trptcolin.main.Board;
+import trptcolin.boards.BoardIn2D;
 import trptcolin.players.PlayerFactoryImpl;
 
 import javax.swing.*;
@@ -26,7 +26,7 @@ public class SwingViewTest extends Assert
     @Before
     public void setup()
     {
-        controller = new MockController(new Board());
+        controller = new MockController(new BoardIn2D());
         swingView = new SwingView(controller, new PlayerFactoryImpl());
     }
 
