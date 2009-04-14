@@ -1,10 +1,11 @@
 package trptcolin.players;
 
 import junit.framework.Assert;
-import org.junit.Before;
-import trptcolin.boards.BoardIn3D;
 import trptcolin.main.Board;
 import trptcolin.main.Player;
+import trptcolin.boards.BoardIn3D;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * Created by IntelliJ IDEA.
@@ -29,5 +30,12 @@ public class ComputerPlayer3DTest extends Assert
        otherPlayer = new ComputerPlayer(board, 'O');
 
        computerPlayer.setOtherPlayer(otherPlayer);
+    }
+
+    @Test
+    public void shouldStartInCenter() throws Exception
+    {
+        computerPlayer.makeMove();
+//        assertEquals('X', board.charAt(13));
     }
 }
