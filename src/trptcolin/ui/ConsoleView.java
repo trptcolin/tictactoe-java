@@ -4,7 +4,6 @@ import trptcolin.main.Board;
 import trptcolin.main.Controller;
 import trptcolin.main.PlayerFactory;
 import trptcolin.main.View;
-import trptcolin.players.ComputerPlayer;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -40,8 +39,6 @@ public class ConsoleView implements View
         {
             System.out.println("Press any key to play again (Ctrl-C to quit)");
         }
-
-System.out.println("ComputerPlayer.bestMoveTime = " + ComputerPlayer.bestMoveTime);
     }
 
     protected char charAt(int position)

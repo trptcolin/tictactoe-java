@@ -21,7 +21,10 @@ public class BoardIn3D extends Board
 
     private static int[][] createWinSets()
     {
-        int[][] winSets = {
+//        x has {1, 14, 20}
+//        o has {...}
+
+        return new int[][]{
                 // depth-slice 1:
                 {0,1,2}, {3,4,5}, {6,7,8},  // width
                 {0,3,6}, {1,4,7}, {2,5,8},  // height
@@ -56,15 +59,16 @@ public class BoardIn3D extends Board
                 // 3-D diagonals
                 {0,13,26}, {6,13,20}, {2,13,24}, {8,13,18}
         };
-        return winSets;
     }
 
     public Board copy() throws Exception
     {
         Board newBoard = new BoardIn3D();
         for(int position = 0; position < squares.length; position++)
-            newBoard.populate(squares[position], position);
+            newBoard.populateWithoutChecks(squares[position], position);
 
         return newBoard;
     }
+
+    
 }

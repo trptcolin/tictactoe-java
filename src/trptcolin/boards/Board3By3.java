@@ -9,7 +9,7 @@ import trptcolin.main.Board;
  * Time: 9:47:06 AM
  * To change this template use File | Settings | File Templates.
  */
-public class BoardIn2D extends Board
+public class Board3By3 extends Board
 {
     private static int[][] winSetsIn2D = new int[][]{
                 {0, 1, 2},
@@ -21,7 +21,7 @@ public class BoardIn2D extends Board
                 {0, 4, 8},
                 {2, 4, 6} };
 
-    public BoardIn2D()
+    public Board3By3()
     {
         squares = new char[9];
         winner = 0;
@@ -47,7 +47,7 @@ public class BoardIn2D extends Board
 
     public Board copy() throws Exception
     {
-        Board newBoard = new BoardIn2D();
+        Board newBoard = new Board3By3();
         for(int position = 0; position < squares.length; position++)
             newBoard.populate(squares[position], position);
         

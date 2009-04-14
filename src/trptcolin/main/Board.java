@@ -1,7 +1,7 @@
 package trptcolin.main;
 
+import java.util.LinkedList;
 import java.util.List;
-import java.util.ArrayList;
 
 /**
  * Created by IntelliJ IDEA.
@@ -13,8 +13,8 @@ public abstract class Board
 {
     protected char[] squares;
 
-    public char winner;
-    public boolean won;
+    public char winner = 0;
+    public boolean gameOver = false;
 
     public static int[][] winSets;
 
@@ -59,16 +59,16 @@ public abstract class Board
         }
         squares[position] = mark;
         
-//        if(isWon(position))
-//        {
-//            won = true;
-//            winner = mark;
-//        }
-//        else
-//        {
-//            won = false;
-//            winner = 0;
-//        }
+        if(isWon(position))
+        {
+            gameOver = true;
+            winner = mark;
+        }
+        else
+        {
+            gameOver = isFull();
+            winner = 0;
+        }
     }
 
 
@@ -85,7 +85,7 @@ public abstract class Board
         return true;
     }
 
-    private boolean isWon(int position)
+    public boolean isWon(int position)
     {
         char c;
         
@@ -104,12 +104,11 @@ public abstract class Board
         return false;
     }
 
-
     public boolean isWon()
     {
         char c;
         
-        for (int[] winSet : winSets)
+        for(int[] winSet : winSets)
         {
             c = charAt(winSet[0]);
             if(c != 0 && c == charAt(winSet[1]) && c == charAt(winSet[2]))
@@ -134,7 +133,7 @@ public abstract class Board
 
     public List<Integer> openSpaces()
     {
-        List<Integer> openSpaces = new ArrayList<Integer>();
+        List<Integer> openSpaces = new LinkedList<Integer>();
         for(int i = 0; i < numberOfSquares(); i++)
         {
             if(charAt(i) == 0)
@@ -152,6 +151,12 @@ public abstract class Board
             squares[i] = '\0';
     }
 
+    public void clear(int position) throws Exception
+    {
+        squares[position] = '\0';
+    }
+
+
     public boolean empty()
     {
         for(int i = 0; i < numberOfSquares(); i++)
@@ -164,6 +169,33 @@ public abstract class Board
 
     public boolean isTie()
     {
-        return isFull() && !isWon();
+//        return isFull() && !isWon();
+        return gameOver && winner == 0;
+    }
+
+    public int hashCode()
+    {
+        String squareString = new String(squares);
+        return squareString.hashCode();
+    }
+
+    public boolean equals(Board otherBoard)
+    {
+        int biggestBoardSize = Math.max(squares.length, otherBoard.squares.length);
+        for(int i = 0; i < biggestBoardSize; i++)
+        {
+            if(squares[i] != otherBoard.squares[i])
+                return false;
+        }
+        return true;
+    }
+
+    public void populateWithoutChecks(char mark, int position) throws Exception
+    {
+        if(isOccupied(position))
+        {
+            throw new Exception();
+        }
+        squares[position] = mark;
     }
 }

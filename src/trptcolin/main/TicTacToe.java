@@ -1,8 +1,8 @@
 package trptcolin.main;
 
-import trptcolin.boards.BoardIn3D;
+import trptcolin.boards.Board4By4;
 import trptcolin.players.PlayerFactoryImpl;
-import trptcolin.ui.ConsoleViewIn3D;
+import trptcolin.ui.ConsoleView4x4;
 import trptcolin.ui.ControllerImpl;
 
 /**
@@ -10,7 +10,6 @@ import trptcolin.ui.ControllerImpl;
  * User: 8thlight
  * Date: Mar 24, 2009
  * Time: 1:18:35 PM
- * To change this template use File | Settings | File Templates.
  */
 public class TicTacToe
 {
@@ -21,9 +20,9 @@ public class TicTacToe
         PlayerFactory playerFactory = new PlayerFactoryImpl();
         Player player1, player2;
 
-        Board board = new BoardIn3D();
+        Board board = new Board4By4();
         Controller gameController = new ControllerImpl(board);
-        gameController.setUI(new ConsoleViewIn3D(gameController, playerFactory, board));
+        gameController.setUI(new ConsoleView4x4(gameController, playerFactory, board));
 
         boolean playAgain = true;
         int gameType;

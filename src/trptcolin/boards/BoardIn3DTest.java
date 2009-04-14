@@ -229,19 +229,30 @@ public class BoardIn3DTest extends Assert
         board.populate('X', 8);
         assertEquals(true, board.sameSquares(otherBoard));
     }
-//
-//    @Test
-//    public void shouldRecordWinnerAfterPopulating() throws Exception
-//    {
-//        board.populate('X', 0);
-//        board.populate('X', 1);
-//
-//        assertEquals(false, board.won);
-//        assertEquals(0, board.winner);
-//
-//        board.populate('X', 2);
-//
-//        assertEquals(true, board.won);
-//        assertEquals('X', board.winner);
-//    }
+
+    @Test
+    public void shouldRecordWinnerAfterPopulating() throws Exception
+    {
+        board.populate('X', 0);
+        board.populate('X', 1);
+
+        assertEquals(false, board.gameOver);
+        assertEquals(0, board.winner);
+
+        board.populate('X', 2);
+
+        assertEquals(true, board.gameOver);
+        assertEquals('X', board.winner);
+    }
+
+    @Test
+    public void shouldHashBySquares() throws Exception
+    {
+        board.populate('X', 0);
+
+        Board newBoard = new BoardIn3D();
+        newBoard.populate('X', 0);
+
+        assertEquals(board.hashCode(), newBoard.hashCode());
+    }
 }

@@ -3,7 +3,7 @@ package trptcolin.ui;
 import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import trptcolin.boards.BoardIn2D;
+import trptcolin.boards.Board3By3;
 import trptcolin.players.PlayerFactoryImpl;
 
 /**
@@ -14,7 +14,7 @@ import trptcolin.players.PlayerFactoryImpl;
  */
 public class ConsoleViewTest extends Assert
 {
-    private BoardIn2D board;
+    private Board3By3 board;
     private ConsoleView consoleView;
     private ControllerImpl controller;
     private PlayerFactoryImpl playerFactory;
@@ -22,8 +22,8 @@ public class ConsoleViewTest extends Assert
     @Before
     public void setup()
     {
-        controller = new ControllerImpl(new BoardIn2D());
-        board = (BoardIn2D)controller.board;
+        controller = new ControllerImpl(new Board3By3());
+        board = (Board3By3)controller.board;
         playerFactory = new PlayerFactoryImpl();
         consoleView = new ConsoleView(controller, playerFactory, board);
     }

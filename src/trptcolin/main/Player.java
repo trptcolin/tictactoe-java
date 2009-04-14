@@ -1,6 +1,6 @@
 package trptcolin.main;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -42,20 +42,28 @@ public abstract class Player
 
     public List<Board> possibleResultingBoards(Board board) throws Exception
     {
-        List<Board> resultingBoards = new ArrayList<Board>();
-//
-//        if(board.gameOver())
-//        {
-//            return resultingBoards;
-//        }
-        
+        List<Board> resultingBoards = new LinkedList<Board>();
+
         for(int possibleMove : board.openSpaces())
         {
             Board newBoard = board.copy();
             newBoard.populate(mark, possibleMove);
             resultingBoards.add(newBoard);
         }
-        
+
         return resultingBoards;
+    }
+
+    public List<Integer> possibleMoves(Board board) throws Exception
+    {
+        List<Integer> moves = new LinkedList<Integer>();
+
+        for(int position = 0; position < board.squares.length; position ++)
+        {
+            if(board.charAt(position) == 0)
+                moves.add(position);
+        }
+
+        return moves;
     }
 }

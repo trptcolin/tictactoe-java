@@ -1,6 +1,6 @@
 package trptcolin.main;
 
-import trptcolin.boards.BoardIn2D;
+import trptcolin.boards.Board3By3;
 
 /**
  * Created by IntelliJ IDEA.
@@ -9,7 +9,7 @@ import trptcolin.boards.BoardIn2D;
  * Time: 11:22:28 AM
  * To change this template use File | Settings | File Templates.
  */
-public class MockBoard extends BoardIn2D
+public class MockBoard extends Board3By3
 {
     public boolean populateCalled = false;
     public char populatedMark = 0;

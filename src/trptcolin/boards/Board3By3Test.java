@@ -15,15 +15,15 @@ import trptcolin.main.Player;
  * To change this template use File | Settings | File Templates.
  */
 
-public class BoardIn2DTest extends Assert
+public class Board3By3Test extends Assert
 {
 
-    private BoardIn2D board;
+    private Board3By3 board;
 
     @Before
     public void setup()
     {
-        board = new BoardIn2D();
+        board = new Board3By3();
     }
 
     @Test
@@ -80,7 +80,7 @@ public class BoardIn2DTest extends Assert
         assertEquals(true, board.isFull());
     }
 
-@Test
+    @Test
     public void shouldBeTie() throws Exception
     {
         board.populate('X', 0, 0);
@@ -96,7 +96,6 @@ public class BoardIn2DTest extends Assert
         assertEquals(true, board.gameOver());
         assertEquals(true, board.isTie());
     }
-
 
     @Test
     public void shouldBeHorizontalWin() throws Exception

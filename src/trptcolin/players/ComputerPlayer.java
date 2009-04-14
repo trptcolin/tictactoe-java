@@ -3,34 +3,36 @@ package trptcolin.players;
 import trptcolin.main.Board;
 import trptcolin.main.Player;
 
+import java.util.Hashtable;
 import java.util.List;
+import java.util.Stack;
 
 /**
  * Created by IntelliJ IDEA.
  * User: 8thlight
  * Date: Mar 23, 2009
  * Time: 8:32:51 PM
- * To change this template use File | Settings | File Templates.
  */
 public class ComputerPlayer extends Player
 {
+    public static Hashtable boardScores = new Hashtable();
 
-    public static long bestMoveTime = 0;
+    public static int searchDepth = 5;
 
     private int infinity = 1000000;
-private long gameOverCallLength = 0;
-private long winnerCallLength = 0;
-private long tieCallLength = 0;
-private long buildingPossibleBoardsCallLength = 0;
 
     public ComputerPlayer(Board board, char mark)
     {
         super(board, mark);
     }
 
+    public void setSearchDepth(int newDepth){
+        searchDepth = newDepth;
+    }
+
     public void makeMove() throws Exception
     {
-        board.populate(mark, bestMove(4));
+        board.populate(mark, bestMove(searchDepth));
     }
 
     private int getMove(Board initialBoard, Board resultBoard)
@@ -48,75 +50,53 @@ private long buildingPossibleBoardsCallLength = 0;
     
     private int bestMove(int depth) throws Exception
     {
-long now = System.currentTimeMillis();
-
-        //TODO MDM - Why not moves?
-        List<Board> possibleResultingBoards = possibleResultingBoards(board);
-
-System.out.println("possibleResultingBoardsTime = " + (System.currentTimeMillis() - now));
+        List<Integer> possibleMoves = possibleMoves(board);
 
         int bestScoreSoFar = -infinity;
         int currentScore;
         int bestMoveSoFar = -1;
         int move;
 
-        for(Board resultBoard : possibleResultingBoards)
+        Stack<Integer> moveStack = new Stack<Integer>();
+        
+        for(int possibleMove: possibleMoves)
         {
+            moveStack.push(possibleMove);
+            board.populate(mark, possibleMove);
 
-long minimaxStart = System.currentTimeMillis();
-gameOverCallLength = 0;
-winnerCallLength = 0;            
-buildingPossibleBoardsCallLength = 0;
-            
-            currentScore = minimax(resultBoard, depth, this);
+            currentScore = minimax(moveStack, depth, this);
 
-long minimaxDuration = System.currentTimeMillis() - minimaxStart;
-System.out.println("minimaxDuration = " + minimaxDuration);
-System.out.println("gameOverCallLength = " + gameOverCallLength);
-System.out.println("tieCallLength = " + gameOverCallLength);
+            board.clear(possibleMove);
+            moveStack.pop();
 
-System.out.println("winnerCallLength = " + winnerCallLength);
-System.out.println("buildingPossibleBoardsCallLength = " + buildingPossibleBoardsCallLength);
-            move = getMove(board, resultBoard);
+            move = possibleMove;
 
             if(currentScore > bestScoreSoFar)
             {
                 bestScoreSoFar = currentScore;
                 bestMoveSoFar = move;
             }
-        }
-
-bestMoveTime = System.currentTimeMillis() - now;        
+        }     
 
         return bestMoveSoFar;
     }
 
-
-    private int minimax(Board board, int depth, Player player) throws Exception
+    private int minimax(Stack<Integer> moveStack, int depth, Player player) throws Exception
     {
-
-long beforeGameOver = System.currentTimeMillis();
-
-        boolean gameOver = board.gameOver();
-
-gameOverCallLength += (System.currentTimeMillis() - beforeGameOver);
-
-long beforeBoardIsWinner = System.currentTimeMillis();
-        boolean isWinner = gameOver && (player.mark == board.winner);
-winnerCallLength += (System.currentTimeMillis() - beforeBoardIsWinner);
-
-long beforeTie = System.currentTimeMillis();
-        boolean isTie = gameOver && board.isTie();
-tieCallLength += (System.currentTimeMillis() - beforeTie);
+        boolean gameOver = board.gameOver;
 
         if(gameOver || depth == 0)
         {
-            if(isWinner)
+            if(gameOver && (player.mark == board.winner))
                 return infinity;
-            else if(isTie)
+            else if(gameOver && board.isTie())
                 return 0;
-            else
+            else if(player.getOtherPlayer().mark == board.winner)
                 return -infinity;
+            else
+            {
+                return -infinity;
+            }
         }
         else
         {
@@ -126,14 +106,33 @@ tieCallLength += (System.currentTimeMillis() - beforeTie);
             int otherPlayerScore;
             int maxOtherPlayerScore = -infinity - 1;
 
-long beforeBuildingPossibleBoards = System.currentTimeMillis();
-            List<Board> possibleBoards = otherPlayer.possibleResultingBoards(board);
-buildingPossibleBoardsCallLength += (System.currentTimeMillis() - beforeBuildingPossibleBoards);
+            List<Integer> possibleOtherPlayerMoves = otherPlayer.possibleMoves(board);
 
-
-            for(Board child : possibleBoards)
+            for(int possibleMove : possibleOtherPlayerMoves)
             {
-                otherPlayerScore = minimax(child, depth - 1, otherPlayer);
+                moveStack.push(possibleMove);
+                board.populate(otherPlayer.mark, possibleMove);
+
+//                if(boardScores.containsKey(board))
+//                {
+//                    otherPlayerScore = (Integer) boardScores.get(board);
+//                    otherPlayerScore = minimax(child, depth - 1, otherPlayer);
+//                }
+//                else
+//                {
+    //                    otherPlayerScore = minimax(child, depth - 1, otherPlayer);
+                    otherPlayerScore = minimax(moveStack, depth - 1, otherPlayer);
+
+//                    if(player.mark == mark)
+//                        boardScores.put(board, -otherPlayerScore);
+//                    else
+//                        boardScores.put(board, otherPlayerScore);
+//
+//                }
+
+                board.clear(possibleMove);
+                moveStack.pop();
+
                 maxOtherPlayerScore = Math.max(otherPlayerScore, maxOtherPlayerScore);
                 bestScore = -maxOtherPlayerScore;
             }

@@ -3,7 +3,7 @@ package trptcolin.players;
 import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import trptcolin.boards.BoardIn2D;
+import trptcolin.boards.Board3By3;
 import trptcolin.main.Board;
 import trptcolin.main.Player;
 
@@ -24,9 +24,10 @@ public class ComputerPlayerTest extends Assert
     @Before
     public void setup()
     {
-        board = new BoardIn2D();
+        board = new Board3By3();
         mark = 'X';
         computerPlayer = new ComputerPlayer(board, mark);
+        computerPlayer.setSearchDepth(4);
         otherPlayer = new ComputerPlayer(board, 'O');
 
         computerPlayer.setOtherPlayer(otherPlayer);
@@ -115,5 +116,15 @@ public class ComputerPlayerTest extends Assert
 
         assertTrue('X' == board.charAt(4) || 'X' == board.charAt(0));
     }
+
+    @Test
+    public void shouldSetSearchDepth() throws Exception
+    {
+        int depth = computerPlayer.searchDepth;
+        computerPlayer.setSearchDepth(depth + 1);
+        assertEquals(depth + 1, computerPlayer.searchDepth);
+    }
+
+
 
 }
