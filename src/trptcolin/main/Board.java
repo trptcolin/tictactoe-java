@@ -198,4 +198,18 @@ public abstract class Board
         }
         squares[position] = mark;
     }
+
+    public String toString()
+    {
+
+        StringBuffer buffer = new StringBuffer();
+        for (char square : squares)
+        {
+            if(square != 0)
+                buffer.append(square);
+            else
+                buffer.append(" ");
+        }
+        return buffer.toString();
+    }
 }

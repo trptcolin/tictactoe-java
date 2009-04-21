@@ -112,4 +112,15 @@ public class Board4By4Test extends Assert
         assertEquals(false, board.isWon(0));
     }
 
+    @Test
+    public void shouldConvertToString() throws Exception
+    {
+        board.populate('X', 0);
+        board.populate('X', 1);
+        board.populate('X', 2);
+        board.populate('X', 15);
+
+        assertEquals("XXX            X", board.toString());
+    }
+
 }

@@ -8,27 +8,33 @@
         <delete dir="${build.dir}"></delete>
     </target>
 
-    <target name="compile">
-        <mkdir dir="${build.dir}" />
-        <javac srcdir="${src.dir}" destdir="${build.dir}">
-            <include name="**/*.java"/>
-        </javac>        
-    </target>
-
     <path id="classpath">
         <pathelement location="${build.dir}" />
+        <fileset dir="${lib.dir}">
+            <include name="*.jar" />
+        </fileset>
     </path>
+
 
     <path id="test.classpath">
         <pathelement location="${build.dir}" />
         <fileset dir="${lib.dir}">
-            <include name="**/*.jar" />
+            <include name="*.jar" />
         </fileset>
     </path>
+    
+    <target name="compile">
+        <mkdir dir="${build.dir}" />
+        <javac srcdir="${src.dir}" destdir="${build.dir}">
+            <classpath refid="classpath" />
+            <include name="**/*.java"/>
+        </javac>        
+    </target>
 
     <target name="compile-test">
         <mkdir dir="${build.dir}" />
         <javac srcdir="${src.dir}" destdir="${build.dir}" debug="yes">
+            <classpath refid="test.classpath" />
             <include name="**/**/*.java" />
         </javac>
     </target>
