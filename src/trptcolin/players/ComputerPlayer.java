@@ -142,8 +142,6 @@ public class ComputerPlayer extends Player
         makeScratchMove(moveStack, possibleMove, otherPlayer);
 
         String boardString = board.toString();
-        
-// TODO Test the caching here
 
         if(boardScores.containsKey(boardString))
             otherPlayerScore = getCachedScore(player, boardString);

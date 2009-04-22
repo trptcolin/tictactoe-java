@@ -9,7 +9,6 @@ import trptcolin.main.View;
  * User: 8thlight
  * Date: Mar 27, 2009
  * Time: 9:12:49 AM
- * To change this template use File | Settings | File Templates.
  */
 public class ControllerImpl implements Controller
 {

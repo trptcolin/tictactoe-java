@@ -5,7 +5,6 @@ package trptcolin.main;
  * User: 8thlight
  * Date: Mar 23, 2009
  * Time: 3:14:51 PM
- * To change this template use File | Settings | File Templates.
  */
 public class Game
 {

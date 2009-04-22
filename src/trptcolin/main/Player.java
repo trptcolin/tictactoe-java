@@ -8,7 +8,6 @@ import java.util.List;
  * User: 8thlight
  * Date: Mar 23, 2009
  * Time: 12:31:07 PM
- * To change this template use File | Settings | File Templates.
  */
 public abstract class Player
 {

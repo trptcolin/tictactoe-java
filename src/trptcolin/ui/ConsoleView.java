@@ -66,7 +66,7 @@ public class ConsoleView implements View
     {
         String choices = "";
 
-        for(int i = 0; i < playerFactory.numberOfGameTypes; i++)
+        for(int i = 0; i < PlayerFactory.numberOfGameTypes; i++)
         {
             String gameTypeString = playerFactory.gameTypeToString(i);
             choices += "\t" + (i + 1) + " - " + gameTypeString + "\n";
@@ -121,7 +121,7 @@ public class ConsoleView implements View
             public void run()
             {
                 BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-                String moveInput = "";
+                String moveInput;
                 int move = -1;
                 while(move == -1)
                 {

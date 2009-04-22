@@ -168,21 +168,23 @@ public class ComputerPlayerTest extends Assert
         board.populate('O', 5);
 
         board.populate('X', 7);
-        board.populate('O', 6);
 
+
+        int moveToCheck = 6;
         // since we're checking for the other player, it gets
-        board.populate('O', 8);
+        board.populate('O', moveToCheck);
+
 
         String boardString = board.toString();
         computerPlayer.boardScores.put(boardString, 12345);
         
-        board.clear(8);
+        board.clear(moveToCheck);
         Stack<Integer> moves = new Stack<Integer>();
 
         assertEquals(true, computerPlayer.boardScores.containsKey(boardString));
         assertEquals(12345, (int)computerPlayer.boardScores.get(boardString));
 
-        int value = computerPlayer.getValueToOtherPlayer(moves, computerPlayer, 8, 1);
+        int value = computerPlayer.getValueToOtherPlayer(moves, computerPlayer, moveToCheck, 1);
 
         // since boardScores contained the value to player X,
         assertEquals(-12345, value);

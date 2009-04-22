@@ -9,7 +9,6 @@ import trptcolin.main.View;
  * User: 8thlight
  * Date: Mar 24, 2009
  * Time: 11:24:32 AM
- * To change this template use File | Settings | File Templates.
  */
 public class MockController implements Controller
 {

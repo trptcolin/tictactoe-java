@@ -5,7 +5,6 @@ package trptcolin.main;
  * User: 8thlight
  * Date: Mar 24, 2009
  * Time: 11:20:03 AM
- * To change this template use File | Settings | File Templates.
  */
 public class MockPlayer extends Player
 {

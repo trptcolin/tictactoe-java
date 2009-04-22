@@ -16,7 +16,6 @@ import java.awt.event.MouseListener;
  * User: 8thlight
  * Date: Mar 26, 2009
  * Time: 3:50:11 PM
- * To change this template use File | Settings | File Templates.
  */
 public class SwingView implements View
 {
@@ -84,7 +83,7 @@ public class SwingView implements View
 
         jframe.getContentPane().setLayout(new GridLayout(2, 2));
 
-        for(int i = 0; i < playerFactory.numberOfGameTypes; i++)
+        for(int i = 0; i < PlayerFactory.numberOfGameTypes; i++)
         {
             String gameTypeString = playerFactory.gameTypeToString(i);
             buttons[i] = new JButton(gameTypeString);

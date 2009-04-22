@@ -15,7 +15,6 @@ import java.io.PrintStream;
  * User: 8thlight
  * Date: Mar 23, 2009
  * Time: 3:16:11 PM
- * To change this template use File | Settings | File Templates.
  */
 public class GameTest extends Assert
 {

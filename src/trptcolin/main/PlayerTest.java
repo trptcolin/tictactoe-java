@@ -10,7 +10,6 @@ import trptcolin.boards.Board3By3;
  * User: 8thlight
  * Date: Mar 23, 2009
  * Time: 12:31:39 PM
- * To change this template use File | Settings | File Templates.
  */
 public class PlayerTest extends Assert
 {
@@ -54,8 +53,6 @@ public class PlayerTest extends Assert
     {
         for(int i = 0; i < 7; i++)
             player.makeMove();
-
-        Player otherPlayer = new MockPlayer(board, 'O');
 
         assertEquals(2, player.possibleResultingBoards(board).size());
     }

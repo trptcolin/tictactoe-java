@@ -16,15 +16,13 @@ public class ConsoleViewTest extends Assert
 {
     private Board3By3 board;
     private ConsoleView consoleView;
-    private ControllerImpl controller;
-    private PlayerFactoryImpl playerFactory;
 
     @Before
     public void setup()
     {
-        controller = new ControllerImpl(new Board3By3());
-        board = (Board3By3)controller.board;
-        playerFactory = new PlayerFactoryImpl();
+        ControllerImpl controller = new ControllerImpl(new Board3By3());
+        board = (Board3By3) controller.board;
+        PlayerFactoryImpl playerFactory = new PlayerFactoryImpl();
         consoleView = new ConsoleView(controller, playerFactory, board);
     }
 

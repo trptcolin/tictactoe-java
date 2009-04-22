@@ -17,16 +17,13 @@ import trptcolin.players.PlayerFactoryImpl;
 public class ConsoleView4x4Test extends Assert
 {
     private ConsoleView4x4 consoleView;
-    private ControllerImpl controller;
-    private Board board;
-    private PlayerFactory playerFactory;
 
     @Before
     public void setup()
     {
-        controller = new ControllerImpl(new Board4By4());
-        board = (Board4By4)controller.board;
-        playerFactory = new PlayerFactoryImpl();
+        ControllerImpl controller = new ControllerImpl(new Board4By4());
+        Board board = controller.board;
+        PlayerFactory playerFactory = new PlayerFactoryImpl();
         consoleView = new ConsoleView4x4(controller, playerFactory, board);
     }
 

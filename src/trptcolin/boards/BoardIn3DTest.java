@@ -212,7 +212,7 @@ public class BoardIn3DTest extends Assert
     @Test
     public void shouldHave49PossibleWinSets() throws Exception
     {
-        assertEquals(49, board.winSets.length);
+        assertEquals(49, Board.winSets.length);
     }
 
     @Test

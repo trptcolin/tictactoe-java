@@ -33,6 +33,6 @@ public class TestView extends SwingView
 
     private void setVisible(boolean visible)
     {
-        jframe.setVisible(false);
+        jframe.setVisible(visible);
     }
 }

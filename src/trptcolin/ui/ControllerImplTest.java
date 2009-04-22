@@ -11,7 +11,6 @@ import trptcolin.main.MockBoard;
  * User: 8thlight
  * Date: Mar 28, 2009
  * Time: 10:42:42 PM
- * To change this template use File | Settings | File Templates.
  */
 public class ControllerImplTest extends Assert
 {
@@ -24,7 +23,7 @@ public class ControllerImplTest extends Assert
     {
         board = new MockBoard();
         controller = new ControllerImpl(board);
-        mockView = new MockView(controller);
+        mockView = new MockView();
 
         controller.view = mockView;
     }
@@ -32,7 +31,7 @@ public class ControllerImplTest extends Assert
     @Test
     public void shouldSetGUI() throws Exception
     {
-        MockView newMockView = new MockView(controller);
+        MockView newMockView = new MockView();
         controller.view = newMockView;
         assertEquals(newMockView, controller.view);
 

@@ -7,7 +7,6 @@ import trptcolin.main.Board;
  * User: 8thlight
  * Date: Mar 23, 2009
  * Time: 9:47:06 AM
- * To change this template use File | Settings | File Templates.
  */
 public class Board3By3 extends Board
 {
@@ -38,7 +37,6 @@ public class Board3By3 extends Board
     {
         return isOccupied(flattenRowCol(row, col));
     }
-
 
     public void populate(char mark, int row, int col) throws Exception
     {

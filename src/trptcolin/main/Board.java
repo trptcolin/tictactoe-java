@@ -36,11 +36,7 @@ public abstract class Board
     {
         return charAt(position) != 0;
     }
-//                              
-//    public abstract int numberOfSquares();
-//    public abstract char charAt(int position);
-//    public abstract void populate(char mark, int position) throws Exception;
-
+    
     public int numberOfSquares()
     {
         return squares.length;
