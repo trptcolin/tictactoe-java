@@ -82,19 +82,12 @@ public abstract class Board
     }
 
     public boolean isWon(int position)
-    {
-        char c;
-        
+    {        
         for(int[] winSet : winSets)
         {
             if(position == winSet[0] || position == winSet[1] || position == winSet[2])
             {
-                c = charAt(winSet[0]);
-                if(c != 0 && c == charAt(winSet[1]) && c == charAt(winSet[2]))
-                {
-                    winner = c;
-                    return true;
-                }
+                if (winsWithSet(winSet)) return true;
             }
         }
         return false;
@@ -102,16 +95,21 @@ public abstract class Board
 
     public boolean isWon()
     {
-        char c;
-        
         for(int[] winSet : winSets)
         {
-            c = charAt(winSet[0]);
-            if(c != 0 && c == charAt(winSet[1]) && c == charAt(winSet[2]))
-            {
-                winner = c;
-                return true;
-            }
+            if (winsWithSet(winSet)) return true;
+        }
+        return false;
+    }
+
+    private boolean winsWithSet(int[] winSet)
+    {
+        char c;
+        c = charAt(winSet[0]);
+        if(c != 0 && c == charAt(winSet[1]) && c == charAt(winSet[2]))
+        {
+            winner = c;
+            return true;
         }
         return false;
     }
