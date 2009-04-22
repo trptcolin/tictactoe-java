@@ -53,7 +53,7 @@ public class ControllerImplTest extends Assert
 
         assertEquals(true, mockView.clearCalled);
         assertEquals(true, mockView.buildBoardCalled);
-        // uses updateDisplay(), so same test
+        // ensuring updateDisplay() is called
         assertEquals(true, mockView.redrawCalled);
     }
 
@@ -64,7 +64,7 @@ public class ControllerImplTest extends Assert
 
         assertEquals(true, mockView.stopListeningCalled);
         assertEquals(true, mockView.addFinalMessageCalled);
-        // uses updateDisplay(), so same test
+        // ensuring updateDisplay() is called
         assertEquals(true, mockView.redrawCalled);
     }
 

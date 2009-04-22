@@ -163,7 +163,6 @@ public abstract class Board
 
     public boolean isTie()
     {
-//        return isFull() && !isWon();
         return gameOver && winner == 0;
     }
 
