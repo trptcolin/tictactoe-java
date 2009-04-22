@@ -12,15 +12,15 @@ import trptcolin.baseGame.Board;
  * Time: 9:47:23 AM
  */
 
-public class Board3By3Test extends Assert
+public class Board3x3Test extends Assert
 {
 
-    private Board3By3 board;
+    private Board3x3 board;
 
     @Before
     public void setup()
     {
-        board = new Board3By3();
+        board = new Board3x3();
     }
 
     @Test

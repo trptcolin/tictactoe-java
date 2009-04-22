@@ -8,7 +8,7 @@ import trptcolin.baseGame.Board;
  * Date: Mar 23, 2009
  * Time: 9:47:06 AM
  */
-public class Board3By3 extends Board
+public class Board3x3 extends Board
 {
     private static int[][] winSetsIn2D = new int[][]{
                 {0, 1, 2},
@@ -20,7 +20,7 @@ public class Board3By3 extends Board
                 {0, 4, 8},
                 {2, 4, 6} };
 
-    public Board3By3()
+    public Board3x3()
     {
         squares = new char[9];
         winner = 0;
@@ -45,7 +45,7 @@ public class Board3By3 extends Board
 
     public Board copy() throws Exception
     {
-        Board newBoard = new Board3By3();
+        Board newBoard = new Board3x3();
         for(int position = 0; position < squares.length; position++)
             newBoard.populate(squares[position], position);
         

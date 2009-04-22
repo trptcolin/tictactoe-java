@@ -1,6 +1,6 @@
 package trptcolin.main;
 
-import trptcolin.boards.Board4By4;
+import trptcolin.boards.Board4x4;
 import trptcolin.players.PlayerFactoryImpl;
 import trptcolin.ui.ConsoleView4x4;
 import trptcolin.ui.ControllerImpl;
@@ -21,7 +21,7 @@ public class TicTacToe
         PlayerFactory playerFactory = new PlayerFactoryImpl();
         Player player1, player2;
 
-        Board board = new Board4By4();
+        Board board = new Board4x4();
         Controller gameController = new ControllerImpl(board);
         gameController.setUI(new ConsoleView4x4(gameController, playerFactory, board));
 

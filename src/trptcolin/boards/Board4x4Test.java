@@ -11,14 +11,14 @@ import trptcolin.baseGame.Board;
  * Date: Apr 14, 2009
  * Time: 2:25:41 PM
  */
-public class Board4By4Test extends Assert
+public class Board4x4Test extends Assert
 {
     private Board board;
 
     @Before
     public void setup()
     {
-        board = new Board4By4();
+        board = new Board4x4();
     }
 
     @Test
