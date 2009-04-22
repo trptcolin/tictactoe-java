@@ -1,4 +1,4 @@
-package trptcolin.main;
+package trptcolin.baseGame;
 
 import junit.framework.Assert;
 import org.junit.Before;

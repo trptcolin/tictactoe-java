@@ -4,8 +4,8 @@ import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import trptcolin.boards.Board3By3;
-import trptcolin.main.Board;
-import trptcolin.main.Player;
+import trptcolin.baseGame.Board;
+import trptcolin.baseGame.Player;
 
 import java.util.Stack;
 

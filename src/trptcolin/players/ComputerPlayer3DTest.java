@@ -1,8 +1,8 @@
 package trptcolin.players;
 
 import junit.framework.Assert;
-import trptcolin.main.Board;
-import trptcolin.main.Player;
+import trptcolin.baseGame.Board;
+import trptcolin.baseGame.Player;
 import trptcolin.boards.BoardIn3D;
 import org.junit.Before;
 import org.junit.Test;

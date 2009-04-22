@@ -4,11 +4,8 @@ import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import trptcolin.boards.Board3By3;
-import trptcolin.main.Board;
-import trptcolin.main.Controller;
-import trptcolin.main.Player;
-import trptcolin.main.PlayerFactory;
-import trptcolin.ui.MockController;
+import trptcolin.baseGame.MockController;
+import trptcolin.baseGame.*;
 
 /**
  * Created by IntelliJ IDEA.

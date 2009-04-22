@@ -1,6 +1,6 @@
 package trptcolin.boards;
 
-import trptcolin.main.Board;
+import trptcolin.baseGame.Board;
 
 /**
  * Created by IntelliJ IDEA.

@@ -1,4 +1,4 @@
-package trptcolin.main;
+package trptcolin.baseGame;
 
 /**
  * Created by IntelliJ IDEA.
@@ -46,6 +46,6 @@ public class MockBoard extends Board
 
     public Board copy() throws Exception
     {
-        return null;
+        return new MockBoard();
     }
 }

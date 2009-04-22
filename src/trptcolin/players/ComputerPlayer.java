@@ -1,7 +1,7 @@
 package trptcolin.players;
 
-import trptcolin.main.Board;
-import trptcolin.main.Player;
+import trptcolin.baseGame.Board;
+import trptcolin.baseGame.Player;
 
 import java.util.Hashtable;
 import java.util.List;

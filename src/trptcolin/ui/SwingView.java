@@ -1,8 +1,8 @@
 package trptcolin.ui;
 
-import trptcolin.main.Controller;
-import trptcolin.main.PlayerFactory;
-import trptcolin.main.View;
+import trptcolin.baseGame.View;
+import trptcolin.baseGame.Controller;
+import trptcolin.baseGame.PlayerFactory;
 
 import javax.swing.*;
 import java.awt.*;

@@ -3,7 +3,7 @@ package trptcolin.boards;
 import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import trptcolin.main.Board;
+import trptcolin.baseGame.Board;
 
 /**
  * Created by IntelliJ IDEA.

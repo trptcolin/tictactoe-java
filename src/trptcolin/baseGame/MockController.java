@@ -1,8 +1,4 @@
-package trptcolin.ui;
-
-import trptcolin.main.Board;
-import trptcolin.main.Controller;
-import trptcolin.main.View;
+package trptcolin.baseGame;
 
 /**
  * Created by IntelliJ IDEA.

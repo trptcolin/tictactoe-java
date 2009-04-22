@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 import trptcolin.boards.Board3By3;
 import trptcolin.players.PlayerFactoryImpl;
+import trptcolin.baseGame.MockController;
 
 import javax.swing.*;
 import java.awt.*;

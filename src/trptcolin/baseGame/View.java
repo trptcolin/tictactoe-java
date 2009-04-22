@@ -1,4 +1,4 @@
-package trptcolin.main;
+package trptcolin.baseGame;
 
 /**
  * Created by IntelliJ IDEA.

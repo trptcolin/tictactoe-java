@@ -1,8 +1,8 @@
 package trptcolin.players;
 
-import trptcolin.main.Board;
-import trptcolin.main.Controller;
-import trptcolin.main.Player;
+import trptcolin.baseGame.Board;
+import trptcolin.baseGame.Controller;
+import trptcolin.baseGame.Player;
 
 /**
  * Created by IntelliJ IDEA.

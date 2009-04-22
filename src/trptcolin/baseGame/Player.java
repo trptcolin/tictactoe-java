@@ -1,4 +1,4 @@
-package trptcolin.main;
+package trptcolin.baseGame;
 
 import java.util.LinkedList;
 import java.util.List;

@@ -1,6 +1,6 @@
 package trptcolin.ui;
 
-import trptcolin.main.Controller;
+import trptcolin.baseGame.Controller;
 
 import javax.swing.*;
 import java.awt.*;

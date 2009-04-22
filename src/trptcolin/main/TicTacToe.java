@@ -4,6 +4,7 @@ import trptcolin.boards.Board4By4;
 import trptcolin.players.PlayerFactoryImpl;
 import trptcolin.ui.ConsoleView4x4;
 import trptcolin.ui.ControllerImpl;
+import trptcolin.baseGame.*;
 
 /**
  * Created by IntelliJ IDEA.

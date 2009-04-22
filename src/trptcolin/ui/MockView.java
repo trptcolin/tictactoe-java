@@ -1,6 +1,6 @@
 package trptcolin.ui;
 
-import trptcolin.main.View;
+import trptcolin.baseGame.View;
 
 /**
  * Created by IntelliJ IDEA.

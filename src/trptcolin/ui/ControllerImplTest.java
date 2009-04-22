@@ -3,8 +3,8 @@ package trptcolin.ui;
 import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import trptcolin.main.Board;
-import trptcolin.main.MockBoard;
+import trptcolin.baseGame.Board;
+import trptcolin.baseGame.MockBoard;
 
 /**
  * Created by IntelliJ IDEA.
