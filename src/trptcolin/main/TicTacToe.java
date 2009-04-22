@@ -1,10 +1,10 @@
 package trptcolin.main;
 
-import trptcolin.boards.Board4x4;
-import trptcolin.players.PlayerFactoryImpl;
-import trptcolin.ui.ConsoleView4x4;
-import trptcolin.ui.ControllerImpl;
 import trptcolin.baseGame.*;
+import trptcolin.boards.Board3x3;
+import trptcolin.players.PlayerFactoryImpl;
+import trptcolin.ui.ConsoleView;
+import trptcolin.ui.ControllerImpl;
 
 /**
  * Created by IntelliJ IDEA.
@@ -21,9 +21,9 @@ public class TicTacToe
         PlayerFactory playerFactory = new PlayerFactoryImpl();
         Player player1, player2;
 
-        Board board = new Board4x4();
+        Board board = new Board3x3();
         Controller gameController = new ControllerImpl(board);
-        gameController.setUI(new ConsoleView4x4(gameController, playerFactory, board));
+        gameController.setUI(new ConsoleView(gameController, playerFactory, board));
 
         boolean playAgain = true;
         int gameType;
