@@ -42,23 +42,19 @@ public class ComputerPlayer extends Player
         int bestScoreSoFar = -infinity;
         int currentScore;
         int bestMoveSoFar = -1;
-        int move;
 
         Stack<Integer> moveStack = new Stack<Integer>();
         
         for(int possibleMove: possibleMoves)
         {
             makeScratchMove(moveStack, possibleMove, ComputerPlayer.this);
-
-            currentScore = minimax(moveStack, depth, this);
+            currentScore = minimax(moveStack, depth, this);            
             undoScratchMove(moveStack, possibleMove);
-
-            move = possibleMove;
 
             if(currentScore > bestScoreSoFar)
             {
                 bestScoreSoFar = currentScore;
-                bestMoveSoFar = move;
+                bestMoveSoFar = possibleMove;
             }
         }
 

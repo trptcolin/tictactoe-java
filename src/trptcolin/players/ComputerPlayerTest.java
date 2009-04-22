@@ -14,7 +14,6 @@ import java.util.Stack;
  * User: 8thlight
  * Date: Mar 23, 2009
  * Time: 8:33:05 PM
- * To change this template use File | Settings | File Templates.
  */
 public class ComputerPlayerTest extends Assert
 {
@@ -122,16 +121,16 @@ public class ComputerPlayerTest extends Assert
     @Test
     public void shouldSetSearchDepth() throws Exception
     {
-        int depth = computerPlayer.searchDepth;
+        int depth = ComputerPlayer.searchDepth;
         computerPlayer.setSearchDepth(depth + 1);
-        assertEquals(depth + 1, computerPlayer.searchDepth);
+        assertEquals(depth + 1, ComputerPlayer.searchDepth);
     }
 
     @Test
     public void shouldClearCache() throws Exception
     {
-        computerPlayer.boardScores.clear();
-        assertEquals(0, computerPlayer.boardScores.size());
+        ComputerPlayer.boardScores.clear();
+        assertEquals(0, ComputerPlayer.boardScores.size());
     }
 
     @Test
@@ -149,12 +148,12 @@ public class ComputerPlayerTest extends Assert
 
         Stack<Integer> moves = new Stack<Integer>();
 
-        computerPlayer.boardScores.clear();
+        ComputerPlayer.boardScores.clear();
         
         // looking only one move deep
         computerPlayer.getValueToOtherPlayer(moves, computerPlayer, 8, 1);
 
-        assertEquals(1, computerPlayer.boardScores.size());
+        assertEquals(1, ComputerPlayer.boardScores.size());
     }
 
     @Test
@@ -176,17 +175,17 @@ public class ComputerPlayerTest extends Assert
 
 
         String boardString = board.toString();
-        computerPlayer.boardScores.put(boardString, 12345);
+        ComputerPlayer.boardScores.put(boardString, 12345);
         
         board.clear(moveToCheck);
         Stack<Integer> moves = new Stack<Integer>();
 
-        assertEquals(true, computerPlayer.boardScores.containsKey(boardString));
-        assertEquals(12345, (int)computerPlayer.boardScores.get(boardString));
+        assertEquals(true, ComputerPlayer.boardScores.containsKey(boardString));
+        assertEquals(12345, (int)ComputerPlayer.boardScores.get(boardString));
 
         int value = computerPlayer.getValueToOtherPlayer(moves, computerPlayer, moveToCheck, 1);
 
-        // since boardScores contained the value to player X,
+        // since boardScores contained the score for player X, and value holds the score for player O
         assertEquals(-12345, value);
     }
 }
