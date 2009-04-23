@@ -2,8 +2,8 @@ package trptcolin.players;
 
 import trptcolin.baseGame.Board;
 import trptcolin.baseGame.Player;
+import trptcolin.persistence.BoardScoreStorage;
 
-import java.util.Hashtable;
 import java.util.List;
 import java.util.Stack;
 
@@ -15,9 +15,11 @@ import java.util.Stack;
  */
 public class ComputerPlayer extends Player
 {
-    public static Hashtable<String, Integer> boardScores = new Hashtable<String, Integer>();
+//    public static Hashtable<String, Integer> boardScores = new Hashtable<String, Integer>();
+    public static BoardScoreStorage boardScores = new BoardScoreStorage();
 
-    public static int searchDepth = 8;
+
+    public static int searchDepth = 16;
 
     private int infinity = 1000000;
 
@@ -25,6 +27,12 @@ public class ComputerPlayer extends Player
     {
         super(board, mark);
     }
+
+    public static void setBoardScores(Object storedBoardScores)
+    {
+        boardScores = (BoardScoreStorage)storedBoardScores;
+    }
+
 
     public void setSearchDepth(int newDepth){
         searchDepth = newDepth;
@@ -105,7 +113,7 @@ public class ComputerPlayer extends Player
             return -infinity;
         else
         {
-            return -infinity;
+            return 0;
         }
     }
 

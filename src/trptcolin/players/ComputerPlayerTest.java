@@ -1,11 +1,13 @@
 package trptcolin.players;
 
 import junit.framework.Assert;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import trptcolin.boards.Board3x3;
 import trptcolin.baseGame.Board;
 import trptcolin.baseGame.Player;
+import trptcolin.boards.Board3x3;
+import trptcolin.persistence.MockBoardScoreStorage;
 
 import java.util.Stack;
 
@@ -32,6 +34,15 @@ public class ComputerPlayerTest extends Assert
         otherPlayer = new ComputerPlayer(board, 'O');
 
         computerPlayer.setOtherPlayer(otherPlayer);
+
+//        ComputerPlayer.boardScores = new MockBoardScoreStorage();
+        ComputerPlayer.setBoardScores(new MockBoardScoreStorage());
+    }
+
+    @After
+    public void tearDown()
+    {
+        ComputerPlayer.boardScores.clear();
     }
 
     @Test

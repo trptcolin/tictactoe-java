@@ -194,7 +194,6 @@ public abstract class Board
 
     public String toString()
     {
-
         StringBuffer buffer = new StringBuffer();
         for (char square : squares)
         {
